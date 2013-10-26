@@ -5,9 +5,9 @@
         for (var i = 0; i < data.length; i++) {
             var message = data[i];
             $('.chatbox').append('<li>' +
-                                 '<span class="name">' + message.Name + '</span>' +
-                                 '<span class="body">' + message.Body + '</span>' +
-                                 '<time>' + moment(message.Time).fromNow() + '</time>' +
+                                 '<span class="name">' + message.name + '</span>' +
+                                 '<span class="body">' + message.body + '</span>' +
+                                 '<time>' + message.time + '</time>' +
                                  '</li>');
         }
     });
