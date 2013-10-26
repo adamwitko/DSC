@@ -24,6 +24,52 @@ namespace TeamSauce.Controllers
             return Json(mongoStore.GetAllQuestionnaires(), JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpGet]
+        public JsonResult AllAverage()
+        {
+            var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+
+            var listOfQs = mongoStore.GetAllQuestionnaires();
+
+            var catDic = new Dictionary<string, IList<int>>();
+
+            var some = listOfQs.Select(q =>
+                                           {
+
+                                               var date = q.date;
+                                               var avcats =
+                                                   q.questionnaireresponses.ElementAt(0).ratings.ElementAt(0).
+                                                       categorytype;
+
+                                               foreach (var el in q.questionnaireresponses)
+                                               {
+                                                   foreach (var subel in el.ratings)
+                                                   {
+                                                       if (catDic.ContainsKey(subel.categorytype))
+                                                       {
+                                                           catDic[subel.categorytype].Add(Int32.Parse(subel.value));
+                                                       } else
+                                                       {
+                                                           catDic[subel.categorytype] = new List<int>(Int32.Parse(subel.value));
+                                                       }
+                                                   }
+                                               }
+
+                                               var properCatDic = new Dictionary<string, int>();
+                                               foreach (var kv in catDic)
+                                               {
+                                                   properCatDic[kv.Key] =
+                                                       (int)
+                                                       Math.Round((float) kv.Value.Aggregate((a, e) => a + e)/
+                                                                  kv.Value.Count());
+                                               }
+
+                                               return properCatDic;
+                                           });
+            return Json(some, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public JsonResult Create()
         {
@@ -48,6 +94,10 @@ namespace TeamSauce.Controllers
 
             return Json(q, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
 
         [HttpGet]
         public JsonResult AddQuestionnaireResponsesToQuestionaire(string questionnaireId )
