@@ -84,7 +84,6 @@ namespace TeamSauce.DataAccess
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 
