@@ -9,5 +9,10 @@
         });
     };
     
+    proxy.client.completed = function (connectionId) {
+        alert(connectionId);
+        window.location = '/Home/Index';
+    };
+
     $.connection.hub.start().done(init);
 });
