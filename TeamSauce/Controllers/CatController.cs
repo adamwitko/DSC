@@ -9,7 +9,7 @@ using Teamsace.DataAccess.Model;
 
 namespace TeamSauce.Controllers
 {
-    public class MongoController : Controller
+    public class CatController : Controller
     {
         //
         // GET: /Mongo/
@@ -17,7 +17,7 @@ namespace TeamSauce.Controllers
         [HttpGet]
         public JsonResult Index()
         {
-            var mongoStore = new TestMongoDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var mongoStore = new CategoryDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
             return Json(mongoStore.GetAllCategories(), JsonRequestBehavior.AllowGet);
         }
@@ -26,7 +26,7 @@ namespace TeamSauce.Controllers
         public ActionResult Create()
         {
 
-            var mongoStore = new TestMongoDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var mongoStore = new CategoryDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
             mongoStore.CreateCategory(new Category()
             {
