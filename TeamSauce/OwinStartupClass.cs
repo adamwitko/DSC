@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using TeamSauce.Connections;
 using TeamSauce.Connections.TeamChatConnection;
 using TeamSauce.Hubs;
 

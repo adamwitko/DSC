@@ -2,8 +2,13 @@
     var myConnection = $.connection("/teamchat");
 
     myConnection.received(function (data) {
-        alert('Received');
-        $("#messages").append("<li>" + data.Name + ': ' + data.Body + ': ' + data.Time + "</li>");
+        if (data[0] == undefined) {
+            $("#messages").append("<li>" + data.Name + ': ' + data.Body + ': ' + data.Time + "</li>");
+        } else {
+            for (var idx = 0; idx < data.length; idx++) {
+                $("#messages").append("<li>" + data[idx].Name + ': ' + data[idx].Body + ': ' + data[idx].Time + "</li>");
+            }
+        }
     });
 
     myConnection.error(function (error) {

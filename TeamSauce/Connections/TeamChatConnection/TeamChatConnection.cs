@@ -3,25 +3,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using TeamSauce.Connections.TeamChatConnection.Data;
-using TeamSauce.Models;
+using TeamSauce.Services.Interfaces;
 
 namespace TeamSauce.Connections.TeamChatConnection
 {
     public class TeamChatConnection : PersistentConnection
     {
-        private Dictionary<string, string> _clients = new Dictionary<string, string>();
+        private readonly ITeamChatMessageService _teamChatMessageService;
+        private readonly Dictionary<string, string> _clients = new Dictionary<string, string>();
 
-        public void SendTime()
+        public TeamChatConnection()
+            : this(ServiceFactory.GetTeamChatMessageService())
         {
-            var data = new TeamChatResponse("Timer", "Time is:");
-            Connection.Broadcast(data);
+        }
+
+        public TeamChatConnection(ITeamChatMessageService teamChatMessageService)
+        {
+            _teamChatMessageService = teamChatMessageService;
         }
 
         protected override Task OnConnected(IRequest request, string connectionId)
         {
             _clients.Add(connectionId, string.Empty);
-            var chatData = new TeamChatResponse("Server", "A new user has joined the room.");
-            return Connection.Broadcast(chatData);
+            
+            var messages = _teamChatMessageService.GetTeamMessages(connectionId);
+
+            return Connection.Broadcast(messages);
         }
 
         protected override Task OnReceived(IRequest request, string connectionId, string data)
@@ -29,13 +36,16 @@ namespace TeamSauce.Connections.TeamChatConnection
             var chatData = JsonConvert.DeserializeObject<TeamChatPost>(data);
             _clients[connectionId] = chatData.Name;
 
-            return Connection.Broadcast(TeamChatResponse.FromResponse(chatData));
+            var teamChatMessage = TeamChatMessage.FromResponse(chatData);
+            _teamChatMessageService.AddMessage(teamChatMessage);
+
+            return Connection.Broadcast(teamChatMessage);
         }
 
         protected override Task OnDisconnected(IRequest request, string connectionId)
         {
             var name = _clients[connectionId];
-            var chatData = new TeamChatResponse("Server", string.Format("{0} has left the room.", name));
+            var chatData = new TeamChatMessage("Server", string.Format("{0} has left the room.", name));
             
             _clients.Remove(connectionId);
             
