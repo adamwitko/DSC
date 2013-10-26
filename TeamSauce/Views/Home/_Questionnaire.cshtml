@@ -1,0 +1,62 @@
+﻿@model dynamic
+<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Popup</a>
+
+<div ng-controller="QuestionnaireCtrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Question time!
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="question" ng-repeat="question in questions">
+                    <span class="glyphicon glyphicon-record"></span>
+                    <span>{{question.text}}</span>    
+                                        
+                    <div ng-controller="RatingCtrl" class="well well-small">
+                        <div ng-init="x = 0">
+                            <rating value="x" max="10" state-on="'icon-ok-sign'" state-off="'icon-ok-circle'"></rating> 
+                            <b>({{x}} of 10)</b>
+                        </div>
+                    </div>   
+                                         
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-submit="go">Go!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function QuestionnaireCtrl($scope) {
+        $scope.questions = [
+          { text: 'how hungry are you feeling?' },
+          { text: 'build an angular app' }];
+
+        $scope.go = function() {
+            alert('trop');
+        };
+    }
+    
+    var RatingCtrl = function ($scope) {
+        $scope.rate = 5;
+        $scope.max = 10;
+        $scope.isReadonly = false;
+
+        $scope.hoveringOver = function (value) {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / $scope.max);
+        };
+
+        $scope.ratingStates = [
+          { stateOn: 'icon-ok-sign', stateOff: 'icon-ok-circle' },
+          { stateOn: 'icon-star', stateOff: 'icon-star-empty' },
+          { stateOn: 'icon-heart', stateOff: 'icon-ban-circle' },
+          { stateOn: 'icon-heart' },
+          { stateOff: 'icon-off' }
+        ];
+    };
+</script>

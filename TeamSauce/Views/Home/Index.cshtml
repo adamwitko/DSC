@@ -3,13 +3,11 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html ng-app>
     <head>
         <title>Team Sauce</title>
         <link href="@Url.Content("/Content/bootstrap.min.css")" rel="stylesheet" />
         <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
-        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     </head>
     <body>
         <div class="row-fluid">
@@ -28,10 +26,18 @@
                 @{ Html.RenderPartial("_Activity"); }
             </div>
           
-          <div class="clearfix visible-xs"></div>
+            <div class="clearfix visible-xs"></div>
             <div class="col-xs-6 col-sm-4 col-md-4">
                 @{ Html.RenderPartial("_SponsorChat"); }
             </div>
         </div>
+        
+        @{ Html.RenderPartial("_Questionnaire"); }
+        
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/ui-bootstrap-0.6.0.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/ui-bootstrap-tpls-0.6.0.min.js")"></script>
     </body>
 </html>
