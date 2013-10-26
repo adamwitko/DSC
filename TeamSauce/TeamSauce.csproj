@@ -133,13 +133,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\ChatConnection.cs" />
-    <Compile Include="Hubs\QuestionnaireHub.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
@@ -469,7 +467,6 @@
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\_Questionnaire.cshtml" />
-    <Content Include="Views\Home\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

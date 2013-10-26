@@ -1,7 +1,7 @@
 ﻿@model dynamic
 <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Popup</a>
 
-<div ng-controller="QuestionnaireCtrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div ng-controller="questionnaireCtrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,14 +11,43 @@
             <div class="modal-body">
                 <div class="question" ng-repeat="question in questions">
                     <span class="glyphicon glyphicon-record"></span>
-                    <span>{{question.text}}</span>    
-                                        
-                    <angular-ratings ng-model="user_rating" notify-url="notify.json" notify-id="id" />     
+                    <span>{{question.text}}</span>
+
+                    <angular-ratings ng-model="user_rating" notify-id="id" />
+
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-submit="go">Go!</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="go()">Go!</button>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function questionnaireCtrl($scope) {
+        var proxy = $.connection.questionnaireHub;
+
+        $.connection.hub.start();
+
+        $scope.questions = [
+            { text: 'how hungry are you feeling?' },
+            { text: 'build an angular app' }];
+
+        $scope.go = function () {
+            var questionnaireId = "4f231fec-afbf-421b-a6c8-8caceeb745ae";
+            
+            var questionnaireResponse = {
+                username: "Adam",
+                ratings: [{
+                    categorytype: "Hunger",
+                    value: 5
+                }, {
+                    categorytype: "Cats",
+                    value: 5
+                }]
+            };
+
+            proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
+        };
+    }
+</script>
