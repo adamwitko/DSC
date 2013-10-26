@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 ﻿using System.Web.Routing;
 using Microsoft.AspNet.SignalR;
+=======
+>>>>>>> master
 using Microsoft.Owin;
 using Owin;
 using TeamSauce.Connections.TeamChatConnection;
@@ -14,6 +17,7 @@ namespace TeamSauce
         {
             app.MapSignalR();
             app.MapSignalR<TeamChatConnection>("/teamchat");
+            app.MapSignalR();
         }
     }
 }

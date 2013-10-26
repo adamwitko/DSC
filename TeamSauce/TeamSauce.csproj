@@ -135,6 +135,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Controllers\MongoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -469,6 +470,7 @@
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\Mongo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -478,6 +480,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeamSauce.DataAccess\TeamSauce.DataAccess.csproj">
+      <Project>{d8f95041-6d35-4f6e-942c-c49fbb7f9f18}</Project>
+      <Name>TeamSauce.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
