@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -28,10 +29,13 @@ namespace TeamSauce.Services
 
         public void CreateUser(string connectionId, string username, string password)
         {
-            var service = new UserDocumentStore();
+            var service = new UserDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
-            if(!service.IsUserValid(username, password))
+            if (!service.IsUserValid(username, password))
+            {
                 _clientContext.Client(connectionId).LoginFailed(connectionId);
+                return;
+            }
 
             if (_currentUsers.All(user => user.ConnectionId != connectionId))
             {

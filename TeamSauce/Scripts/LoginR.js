@@ -13,6 +13,10 @@
         alert(connectionId);
         window.location = '/Home/Index';
     };
+    
+    proxy.client.loginFailed = function () {
+        alert("Incorrect username or password");
+    };
 
     $.connection.hub.start().done(init);
 });
