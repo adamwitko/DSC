@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
@@ -28,7 +29,9 @@ namespace TeamSauce.Connections.TeamChatConnection
             
             var messages = _teamChatMessageService.GetTeamMessages(connectionId);
 
-            return Connection.Broadcast(messages);
+            var connectionIdsToExclude = _clients.Keys.Where(key => key != connectionId);
+
+            return Connection.Broadcast(messages, connectionIdsToExclude.ToArray());
         }
 
         protected override Task OnReceived(IRequest request, string connectionId, string data)

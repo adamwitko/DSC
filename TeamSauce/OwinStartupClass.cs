@@ -1,4 +1,4 @@
-﻿using Microsoft.Owin;
+using Microsoft.Owin;
 using Owin;
 using TeamSauce.Connections.TeamChatConnection;
 
@@ -10,7 +10,6 @@ namespace TeamSauce
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR<TeamChatConnection>("/teamchat");
-            app.MapSignalR();
         }
     }
 }
