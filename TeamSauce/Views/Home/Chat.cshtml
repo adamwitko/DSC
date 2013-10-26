@@ -1,0 +1,19 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Chat";
+}
+
+<h2>Chat</h2>
+
+@using (Html.BeginForm()) {
+    @Html.EditorForModel();
+
+    <input id="send" value="send" type="button" />
+    
+    <ul id="messages" style="list-style:none;">
+        
+    </ul>
+}   
+    
+<script src="~/Scripts/ChatR.js"></script>

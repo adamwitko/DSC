@@ -1,9 +1,22 @@
-﻿var myConnection = $.connection("/chat");
+﻿$(function () {
+    var myConnection = $.connection("/chat");
 
-myConnection.received(function (data) {
-    $("#messages").append("<li>" + data.Name + ': ' + data.Message + "</li>");
-});
+    myConnection.received(function (data) {
+        alert('Received');
+        $("#messages").append("<li>" + data.Name + ': ' + data.Message + "</li>");
+    });
 
-myConnection.error(function (error) {
-    console.warn(error);
+    myConnection.error(function (error) {
+        console.warn(error);
+    });
+
+    myConnection.start()
+        .promise()
+        .done(function () {
+            $("#send").click(function() {
+                var myName = $("#Name").val();
+                var myMessage = $("#Message").val();
+                myConnection.send(JSON.stringify({ name: myName, message: myMessage }));
+            });
+        });
 });
