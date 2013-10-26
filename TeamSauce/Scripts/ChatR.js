@@ -16,15 +16,9 @@
     myConnection.start()
         .promise()
         .done(function () {
-            $('.chat-message').keydown(function(event){
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-
-                if (keycode == '13') {
-                    var body = $('.chat-message').val();
-
-                    myConnection.send(JSON.stringify({ name: currentUser, body: body }));
-                    event.preventDefault();
-                }
+            $("#chat-submit").click(function() {
+                var body = $('.chat-message').val();
+                myConnection.send(JSON.stringify({ name: "Josh", body: body }));
             });
         });
 });
