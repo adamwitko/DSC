@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using TeamSauce.DataAccess.Model;
@@ -55,14 +56,15 @@ namespace TeamSauce.DataAccess
             }
         }
 
-        public Questionnaire FindQuestionnaire(Guid id)
+        public Questionnaire FindQuestionnaire(string id)
         {
             MongoCollection<Questionnaire> collection = GetQuestionnaireCollection();
             var query = Query<Questionnaire>.EQ(e => e.Id, id);
 
             try
             {
-                return collection.FindOne(query);
+                Questionnaire findQuestionnaire = collection.FindOne(query);
+                return findQuestionnaire;
             }
             catch (MongoConnectionException ex)
             {
