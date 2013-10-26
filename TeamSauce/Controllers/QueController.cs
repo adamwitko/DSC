@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using MongoDB.Bson;
 using TeamSauce.DataAccess;
@@ -24,7 +25,6 @@ namespace TeamSauce.Controllers
             return Json(mongoStore.GetAllQuestionnaires(), JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpGet]
         public JsonResult AllAverage()
         {
@@ -32,16 +32,11 @@ namespace TeamSauce.Controllers
 
             var listOfQs = mongoStore.GetAllQuestionnaires();
 
-            var catDic = new Dictionary<string, IList<int>>();
-
             var some = listOfQs.Select(q =>
                                            {
-
+                                               var catDic = new Dictionary<string, IList<int>>();
                                                var date = q.date;
-                                               var avcats =
-                                                   q.questionnaireresponses.ElementAt(0).ratings.ElementAt(0).
-                                                       categorytype;
-
+                                            
                                                foreach (var el in q.questionnaireresponses)
                                                {
                                                    foreach (var subel in el.ratings)
@@ -65,7 +60,11 @@ namespace TeamSauce.Controllers
                                                                   kv.Value.Count());
                                                }
 
-                                               return properCatDic;
+                                               return new Dictionary<string, object>
+                                                          {
+                                                              {"time", date.ToString("s")},
+                                                              {"categories", properCatDic}
+                                                          };
                                            });
             return Json(some, JsonRequestBehavior.AllowGet);
         }
