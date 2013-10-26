@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamSauce.DataAccess;
 
 namespace TeamSauce.Controllers
 {
@@ -13,6 +15,7 @@ namespace TeamSauce.Controllers
 
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -101,5 +104,7 @@ namespace TeamSauce.Controllers
                 return View();
             }
         }
+
+        
     }
 }
