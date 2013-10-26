@@ -479,7 +479,6 @@
     <Content Include="Views\Home\_HackInformation.cshtml" />
     <Content Include="Views\Home\_TeamChat.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
-    <Content Include="Views\Mongo\Index.cshtml" />
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\_Questionnaire.cshtml" />
