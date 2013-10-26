@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using TeamSauce.DataAccess;
 using TeamSauce.Exceptions;
 using TeamSauce.Hubs;
 using TeamSauce.Models;
@@ -27,6 +28,11 @@ namespace TeamSauce.Services
 
         public void CreateUser(string connectionId, string username, string password)
         {
+            var service = new UserDocumentStore();
+
+            if(!service.IsUserValid(username, password))
+                _clientContext.Client(connectionId).LoginFailed(connectionId);
+
             if (_currentUsers.All(user => user.ConnectionId != connectionId))
             {
                 _currentUsers.Add(new User { ConnectionId = connectionId, Name = username });

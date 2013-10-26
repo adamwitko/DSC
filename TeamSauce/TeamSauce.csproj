@@ -135,12 +135,13 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
-    <Compile Include="Controllers\MongoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\ChatConnection.cs" />
     <Compile Include="Hubs\UsersHub.cs" />
+    <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
+    <Compile Include="Controllers\QueController.cs" />
+    <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\angular-rating.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -186,6 +188,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular.ratings.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChatR.js" />
@@ -452,6 +455,11 @@
     <Content Include="Scripts\jquery.signalR-2.0.0.js" />
     <Content Include="Scripts\jquery.signalR-2.0.0.min.js" />
     <Content Include="Scripts\LoginR.js" />
+    <Content Include="Scripts\teamsauce.js" />
+    <Content Include="Scripts\ui-bootstrap-0.6.0.js" />
+    <Content Include="Scripts\ui-bootstrap-0.6.0.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.6.0.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.6.0.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -462,21 +470,24 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Chat.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Home\_Graphs.cshtml" />
     <Content Include="Views\Home\_HackInformation.cshtml" />
     <Content Include="Views\Home\_TeamChat.cshtml" />
-    <Content Include="Views\Home\_Activity.cshtml" />
-    <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Mongo\Index.cshtml" />
+    <Content Include="Views\Home\_Activity.cshtml" />
+    <Content Include="Views\Home\_SponsorChat.cshtml" />
+    <Content Include="Views\Home\_Questionnaire.cshtml" />
+    <Content Include="Views\Cat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

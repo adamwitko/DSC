@@ -8,7 +8,7 @@ using Teamsace.DataAccess.Model;
 
 namespace TeamSauce.DataAccess
 {
-    public class TestMongoDocumentStore : IDisposable
+    public class CategoryDocumentStore : IDisposable
     {
         private MongoServer _mongoServer = null;
         private bool _disposed = false;
@@ -18,11 +18,11 @@ namespace TeamSauce.DataAccess
         private string _collectionName = "category";
         
 
-        public TestMongoDocumentStore()
+        public CategoryDocumentStore()
         {
         }
 
-        public TestMongoDocumentStore(string connectionString)
+        public CategoryDocumentStore(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -85,18 +85,5 @@ namespace TeamSauce.DataAccess
 
             this._disposed = true;
         }
-    }
-
-    public class A
-    {
-        public A()
-        {
-            
-        }
-
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
-        public Guid Id { get; set; }
-
-        public string c { get; set; }
     }
 }
