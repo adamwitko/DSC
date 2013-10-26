@@ -5,9 +5,9 @@
         for (var i = 0; i < data.length; i++) {
             var message = data[i];
             $('.chatbox').append('<li>' +
-                                 '<span class="name">' + message.name + '</span>' +
-                                 '<span class="body">' + message.body + '</span>' +
-                                 '<time>' + message.time + '</time>' +
+                                 '<span class="name">' + message.Name + '</span>' +
+                                 '<span class="body">' + message.Body + '</span>' +
+                                 '<time>' + message.Time + '</time>' +
                                  '</li>');
         }
     });
@@ -21,7 +21,7 @@
         .done(function () {
             $("#chat-submit").click(function() {
                 var body = $('.chat-message').val();
-                myConnection.send(JSON.stringify({ name: "Josh", body: body }));
+                myConnection.send(JSON.stringify({ Name: "Josh", Body: body }));
             });
         });
 });
