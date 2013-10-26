@@ -48,7 +48,7 @@ namespace TeamSauce.DataAccess
             MongoCollection<Questionnaire> collection = GetQuestionnaireCollection();
             try
             {
-                collection.Insert(questionnaire, WriteConcern.Acknowledged);
+                collection.Save(questionnaire, WriteConcern.Acknowledged);
             }
             catch (MongoCommandException ex)
             {
