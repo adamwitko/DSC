@@ -164,6 +164,7 @@
     <Compile Include="Services\Interfaces\ITeamChatMessageService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\SponsorMessageService.cs" />
+    <Compile Include="Services\SponsorMessageTransformer.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\MockTeamChatMessageService.cs" />
     <Compile Include="TeamSauce.cs" />

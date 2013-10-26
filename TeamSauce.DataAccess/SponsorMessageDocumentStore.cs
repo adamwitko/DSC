@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using TeamSauce.DataAccess.Model;
 
 namespace TeamSauce.DataAccess
 {
-    public class UserDocumentStore : IDisposable
+    public class SponsorMessageDocumentStore : IDisposable
     {
         private MongoServer _mongoServer = null;
         private bool _disposed = false;
@@ -16,37 +15,33 @@ namespace TeamSauce.DataAccess
         private string _dbName = "TeamSauceMongoLab";
         private string _collectionName = "user";
 
-        public UserDocumentStore()
+        public SponsorMessageDocumentStore()
         {
-            
         }
 
-        public UserDocumentStore(string connectionstring)
+        public SponsorMessageDocumentStore(string connectionstring)
         {
             _connectionString = connectionstring;
         }
 
-        public bool IsUserValid(string username, string password)
+        public IEnumerable<SponsorMessageDto> GetMessages()
         {
-            try
-            {
-                var query = Query<UserDto>.EQ(user => user.Username, username);
-                
-                var collection = GetUserCollection();
-                return collection.FindAs<UserDto>(query).Any();
-            }
-            catch (MongoConnectionException)
-            {
-                return false;
-            }
+            var collection = GetSponsorMessageCollection();
+            return collection.FindAll().ToList();
         }
 
-        private MongoCollection<UserDto> GetUserCollection()
+        public void PersistMessage(SponsorMessageDto message)
+        {
+            var collection = GetSponsorMessageCollection();
+            collection.Insert(message);
+        }
+
+        private MongoCollection<SponsorMessageDto> GetSponsorMessageCollection()
         {
             var mongoClient = new MongoClient(_connectionString);
             _mongoServer = mongoClient.GetServer();
             var database = _mongoServer.GetDatabase(_dbName);
-            var notesCollection = database.GetCollection<UserDto>(_collectionName);
+            var notesCollection = database.GetCollection<SponsorMessageDto>(_collectionName);
             return notesCollection;
         }
 

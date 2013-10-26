@@ -84,6 +84,24 @@ namespace TeamSauce.DataAccess
 
         public void Dispose()
         {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    if (_mongoServer != null)
+                    {
+                        this._mongoServer.Disconnect();
+                    }
+                }
+            }
+
+            this._disposed = true;
         }
     }
 
