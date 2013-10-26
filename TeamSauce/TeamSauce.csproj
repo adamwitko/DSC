@@ -140,10 +140,13 @@
     <Compile Include="Hubs\ChatConnection.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
-    <Compile Include="Connections\TeamChatConnection\Data\TeamChatResponse.cs" />
+    <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
     <Compile Include="OwinStartupClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Connections\TeamChatConnection\TeamChatConnection.cs" />
+    <Compile Include="ServiceFactory.cs" />
+    <Compile Include="Services\Interfaces\ITeamChatMessageService.cs" />
+    <Compile Include="Services\MockTeamChatMessageService.cs" />
     <Compile Include="TeamSauce.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -482,8 +485,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>6969</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1409/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
