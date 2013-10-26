@@ -133,6 +133,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hubs\Questionnaire\Data\CategoryType.cs" />
+    <Compile Include="Hubs\Questionnaire\Data\QuestionnaireResponse.cs" />
+    <Compile Include="Hubs\Questionnaire\Data\Rating.cs" />
     <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
     <Compile Include="Controllers\QueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
