@@ -1,2 +1,75 @@
 ﻿body {
 }
+
+
+/* Chatbox */
+.chatbox {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid rgba(0,0,0,.4);
+    background: rgba(0,0,0,.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 450px;
+}
+
+.chatbox li {
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0,0,0,.4);
+}
+
+.chatbox .body {
+    width: 240px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.chatbox li:last-child { border: none; }
+
+.chatbox .name {
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 50px;
+}
+
+.chatbox time {
+    float: right;
+    font-size: 11px;
+    margin-top: 3px;
+    color: rgba(0,0,0,.6);
+}
+
+.chat-message-wrapper {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 0;
+    margin: 0;
+    width: 450px;
+    border: 1px solid rgba(0,0,0,.4);
+    border-top: none;
+    background: rgba(0,0,0,.01);
+    box-shadow: inset 0 3px 3px rgba(0,0,0,.2);
+}
+
+.chat-message {
+    color: rgba(0,0,0,.8);
+    outline: none;
+    resize: none;
+    height: 30px;
+    max-width: 430px;
+    min-width: 430px;
+    width: 430px;
+    padding: 10px;
+    background: none;
+    border: none;
+}
+
+.chat-message:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    color: black;
+}
