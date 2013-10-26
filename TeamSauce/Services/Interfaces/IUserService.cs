@@ -1,6 +1,10 @@
-﻿namespace TeamSauce.Services.Interfaces
+﻿using TeamSauce.Models;
+
+namespace TeamSauce.Services.Interfaces
 {
-    public class IUserService
+    public interface IUserService
     {
+        User GetUser(string connectionId);
+        void CreateUser(string connectionId, string username, string password);
     }
 }
