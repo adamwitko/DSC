@@ -1,18 +1,37 @@
-﻿@model dynamic
-
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>title</title>
+        <title>Team Sauce</title>
+        <link href="@Url.Content("/Content/bootstrap.min.css")" rel="stylesheet" />
+        <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     </head>
     <body>
-        <div>
-              lolcat
+        <div class="row-fluid">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                @{ Html.RenderPartial("_Graphs"); }
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4">
+                @{ Html.RenderPartial("_HackInformation"); }
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                @{ Html.RenderPartial("_TeamChat"); }
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                @{ Html.RenderPartial("_Activity"); }
+            </div>
+          
+          <div class="clearfix visible-xs"></div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                @{ Html.RenderPartial("_SponsorChat"); }
+            </div>
         </div>
     </body>
 </html>

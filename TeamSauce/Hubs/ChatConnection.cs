@@ -9,6 +9,7 @@ using TeamSauce.Models;
 
 namespace TeamSauce.Hubs
 {
+    
     public class ChatConnection : PersistentConnection
     {
         private Dictionary<string, string> _clients = new Dictionary<string, string>();
