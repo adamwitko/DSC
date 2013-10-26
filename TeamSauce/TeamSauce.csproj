@@ -137,16 +137,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
-    <Compile Include="Controllers\QueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\CatController.cs" />
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\UsersHub.cs" />
+    <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
+    <Compile Include="Controllers\QueController.cs" />
+    <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="OwinStartupClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Connections\TeamChatConnection\TeamChatConnection.cs" />
@@ -154,6 +158,7 @@
     <Compile Include="Services\Interfaces\IQuestionsService.cs" />
     <Compile Include="Services\Interfaces\ITeamChatMessageService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\MockTeamChatMessageService.cs" />
     <Compile Include="TeamSauce.cs" />
   </ItemGroup>
@@ -453,6 +458,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.0.0.js" />
     <Content Include="Scripts\jquery.signalR-2.0.0.min.js" />
+    <Content Include="Scripts\LoginR.js" />
     <Content Include="Scripts\teamsauce.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.min.js" />
@@ -472,6 +478,8 @@
     <Content Include="Views\Home\_Graphs.cshtml" />
     <Content Include="Views\Home\_HackInformation.cshtml" />
     <Content Include="Views\Home\_TeamChat.cshtml" />
+    <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\Mongo\Index.cshtml" />
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\_Questionnaire.cshtml" />

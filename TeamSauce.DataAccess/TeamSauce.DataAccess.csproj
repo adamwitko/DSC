@@ -50,8 +50,10 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="CategoryDocumentStore.cs" />
     <Compile Include="Model\Questionnaire.cs" />
+    <Compile Include="Model\UserDto.cs" />
     <Compile Include="QuestionnaireDocumentStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDocumentStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -23,6 +23,12 @@ namespace TeamSauce.Controllers
             return View(model);
         }
 
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+
         //
         // GET: /Home/Details/5
 
