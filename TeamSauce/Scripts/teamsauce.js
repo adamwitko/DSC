@@ -4,6 +4,17 @@
 //    $scope.user_rating = 0;
 //    $scope.id = 1;
 //});
+app.controller('QuestionnaireCtrl', ['$scope', 'questionnaireService', function($scope, questionnaireService) {
+    questionnaireService.connect();
+
+    $scope.questions = [
+        { text: 'how hungry are you feeling?' },
+        { text: 'build an angular app' }];
+
+    $scope.go = function () {
+        questionnaireService.complete(undefined);
+    };
+}]);
 
 app.factory('questionnaireService', ['$', '$rootScope', function ($, $rootScope) {
     var proxy;
@@ -32,16 +43,16 @@ app.factory('questionnaireService', ['$', '$rootScope', function ($, $rootScope)
     };
 }]);
 
-function QuestionnaireCtrl($scope, questionnaireService) {
-    questionnaireService.connect();
+//function QuestionnaireCtrl($scope, questionnaireService) {
+//    questionnaireService.connect();
 
-    $scope.questions = [
-        { text: 'how hungry are you feeling?' },
-        { text: 'build an angular app' }];
+//    $scope.questions = [
+//        { text: 'how hungry are you feeling?' },
+//        { text: 'build an angular app' }];
 
-    $scope.go = function () {
-        questionnaireService.complete(undefined);
-    };
-}
+//    $scope.go = function () {
+//        questionnaireService.complete(undefined);
+//    };
+//}
 
-QuestionnaireCtrl.$inject = ['$scope', 'questionnaireService'];
+//QuestionnaireCtrl.$inject = ['$scope', 'questionnaireService'];

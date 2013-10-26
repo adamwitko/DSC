@@ -1,9 +1,15 @@
 ﻿$(function () {
-    var myConnection = $.connection("/chat");
+    var myConnection = $.connection("/teamchat");
 
     myConnection.received(function (data) {
-        alert('Received');
-        $("#messages").append("<li>" + data.Name + ': ' + data.Message + "</li>");
+        for (var i = 0; i < data.length; i++) {
+            var message = data[i];
+            $('.chatbox').append('<li>' +
+                                 '<span class="name">' + message.name + '</span>' +
+                                 '<span class="body">' + message.body + '</span>' +
+                                 '<time>' + message.time + '</time>' +
+                                 '</li>');
+        }
     });
 
     myConnection.error(function (error) {
@@ -13,10 +19,9 @@
     myConnection.start()
         .promise()
         .done(function () {
-            $("#send").click(function() {
-                var myName = $("#Name").val();
-                var myMessage = $("#Message").val();
-                myConnection.send(JSON.stringify({ name: myName, message: myMessage }));
+            $("#chat-submit").click(function() {
+                var body = $('.chat-message').val();
+                myConnection.send(JSON.stringify({ name: "Josh", body: body }));
             });
         });
 });
