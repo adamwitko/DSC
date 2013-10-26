@@ -39,13 +39,13 @@ namespace TeamSauce.Connections.TeamChatConnection
             var teamChatMessage = TeamChatMessage.FromResponse(chatData);
             _teamChatMessageService.AddMessage(teamChatMessage);
 
-            return Connection.Broadcast(teamChatMessage);
+            return Connection.Broadcast(new List<TeamChatMessage> { teamChatMessage });
         }
 
         protected override Task OnDisconnected(IRequest request, string connectionId)
         {
             var name = _clients[connectionId];
-            var chatData = new TeamChatMessage("Server", string.Format("{0} has left the room.", name));
+            var chatData = new TeamChatMessage("Server", string.Format("{0} has disconnected.", name));
             
             _clients.Remove(connectionId);
             
