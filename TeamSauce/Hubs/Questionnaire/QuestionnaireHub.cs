@@ -5,14 +5,12 @@ using Newtonsoft.Json;
 
 namespace TeamSauce.Hubs.Questionnaire
 {
-     [HubName("questionnaireHub")]
+    [HubName("questionnaireHub")]
     public class QuestionnaireHub : Hub
     {
         public void Complete(Guid questionnaireId, string data)
         {
             var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
-
-
         }
     }
 
