@@ -43,7 +43,7 @@ namespace TeamSauce.DataAccess
         }
 
 
-        public void CreateQuestionnaire(Questionnaire questionnaire)
+        public void UpsertQuestionnaire(Questionnaire questionnaire)
         {
             MongoCollection<Questionnaire> collection = GetQuestionnaireCollection();
             try
