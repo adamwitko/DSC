@@ -39,12 +39,13 @@ namespace TeamSauce.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddQuestionnaireResultForUserName(string username)
+        public JsonResult GetQuestionnaireById(string Id)
         {
-         //   var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
-            return null;
+            var q = mongoStore.FindQuestionnaire(Guid.Parse(Id));
 
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
     }
 }
