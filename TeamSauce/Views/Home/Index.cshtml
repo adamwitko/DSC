@@ -1,18 +1,24 @@
-﻿@model dynamic
-
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>title</title>
+        <title>Team Sauce</title>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     </head>
     <body>
-        <div>
-              lolcat
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+          <div class="col-xs-6 col-sm-6 col-md-4">.col-xs-6 .col-sm-6 .col-md-4</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+          <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+          <!-- Optional: clear the XS cols if their content doesn't match in height -->
+          <div class="clearfix visible-xs"></div>
+          <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
         </div>
     </body>
 </html>
