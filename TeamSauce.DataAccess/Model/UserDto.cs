@@ -13,6 +13,8 @@ namespace TeamSauce.DataAccess.Model
 
         public string Password { get; set; }
 
+        public string UserType { get; set; }
+
         public string TeamId { get; set; }
     }
 }
