@@ -2,11 +2,14 @@
     var myConnection = $.connection("/teamchat");
 
     myConnection.received(function (data) {
-        $('.chatbox').append('<li>' +
-                             '<span class="name">' + message.name + '</span>' +
-                             '<span class="body">' + message.body + '</span>' +
-                             '<time>' + moment(message.time).fromNow() + '</time>' +
-                             '</li>');
+        for (var i = 0; i < data.length; i++) {
+            var message = data[i];
+            $('.chatbox').append('<li>' +
+                                 '<span class="name">' + message.name + '</span>' +
+                                 '<span class="body">' + message.body + '</span>' +
+                                 '<time>' + moment(message.time).fromNow() + '</time>' +
+                                 '</li>');
+        }
     });
 
     myConnection.error(function (error) {
