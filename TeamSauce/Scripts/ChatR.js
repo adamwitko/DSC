@@ -1,9 +1,9 @@
 ﻿$(function () {
-    var myConnection = $.connection("/chat");
+    var myConnection = $.connection("/teamchat");
 
     myConnection.received(function (data) {
         alert('Received');
-        $("#messages").append("<li>" + data.Name + ': ' + data.Message + "</li>");
+        $("#messages").append("<li>" + data.Name + ': ' + data.Body + ': ' + data.Time + "</li>");
     });
 
     myConnection.error(function (error) {
@@ -16,7 +16,7 @@
             $("#send").click(function() {
                 var myName = $("#Name").val();
                 var myMessage = $("#Message").val();
-                myConnection.send(JSON.stringify({ name: myName, message: myMessage }));
+                myConnection.send(JSON.stringify({ name: myName, body: myMessage }));
             });
         });
 });
