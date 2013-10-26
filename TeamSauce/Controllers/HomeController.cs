@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamSauce.Models;
 
 namespace TeamSauce.Controllers
 {
@@ -14,6 +15,12 @@ namespace TeamSauce.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Chat()
+        {
+            var model = new ChatData();
+            return View(model);
         }
 
         //
