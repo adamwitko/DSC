@@ -6,6 +6,9 @@
 <html>
     <head>
         <title>Team Sauce</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
         <link href="@Url.Content("/Content/bootstrap.min.css")" rel="stylesheet" />
         <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
         <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
@@ -54,116 +57,6 @@
         <script src="@Url.Content("~/Scripts/LoginR.js")"></script>
         <script src="@Url.Content("~/Scripts/SponsorChatR.js")"></script>
         <script src="@Url.Content("~/Scripts/moment.js")"></script>
-
-        <script type="text/javascript">
-            var proxy = $.connection.teamSauceHub;
-
-            var init_LoginR = function () {
-                $("#log-in").click(function () {
-                    var name = $('#username').val();
-                    var password = $('#password').val();
-                    proxy.server.logIn(name, password);
-                });
-            };
-
-            proxy.client.completed = function (connectionId) {
-                alert(connectionId);
-                init_SponsorChatR();
-                init_QuestionnaireR();
-            };
-
-            proxy.client.loginFailed = function (connectionId) {
-                alert('Fail ' + connectionId);
-            };
-
-            var init_SponsorChatR = function () {
-
-                $("#send-sponsor-message").click(function () {
-                    var body = $('#sponsor-message').val();
-                    proxy.server.messageReceived(body);
-                });
-
-                proxy.server.getMessages();
-            };
-
-            proxy.client.messagesLoaded = function (messages) {
-                alert('Messages Returned' + messages + ':' + messages.length);
-                for (var idx = 0; idx < messages.length; idx++) {
-                    if (messages[idx].MessageType == 'Sponsor') {
-
-                        $('#sponsor-feed').append('<li class="feed-sponsor">' +
-                                         '<span class="name">' + messages[idx].Sender + '</span>' +
-                                         '<span class="body">' + messages[idx].Message + '</span>' +
-                                         '<time>' + messages[idx].Time + '</time>' +
-                                         '</li>');
-
-                    } else {
-                        $('#sponsor-feed').append('<li>' +
-                            '<span class="name">' + messages[idx].Sender + '</span>' +
-                            '<span class="body">' + messages[idx].Message + '</span>' +
-                            '<time>' + messages[idx].Time + '</time>' +
-                            '</li>');
-                    }
-                }
-            };
-
-            proxy.client.userMessage = function (message) {
-                $('#sponsor-feed').append('<li>' +
-                    '<span class="name">' + message.Sender + '</span>' +
-                    '<span class="body">' + message.Message + '</span>' +
-                    '<time>' + message.Time + '</time>' +
-                    '</li>');
-            };
-
-            proxy.client.sponsorMessage = function (message) {
-                $('#sponsor-feed').append('<li class="feed-sponsor">' +
-                    '<span class="name">' + message.Sender + '</span>' +
-                    '<span class="body">' + message.Message + '</span>' +
-                    '<time>' + message.Time + '</time>' +
-                    '</li>');
-            };
-
-            var answers = [];
-            var questionnaireId;
-            
-            var init_QuestionnaireR = function() {
-                $('#submitQuestionnaire').click(function () {
-                    var questionnaireResponse = {
-                        ratings: answers
-                    };
-
-                    proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
-        
-                    answers = [];
-                    questionnaireId = undefined;
-                    $('#mymodal').modal('hide');
-                });
-            };
-            
-            proxy.client.sentOutQuestionnaire = function (questionnaire) {
-                questionnaireId = questionnaire.id;
-                
-                $.each(questionnaire.categoryQuestions, function(index, value) {
-                    $('#questions').append('<div class="question" ng-repeat="question in questions">' +
-                        '<span class="glyphicon glyphicon-record"></span><span>' + value.text + 
-                        '</span><div class="star" data-category=' + value.category + '"/></div>');
-                });
-
-                $('#mymodal').modal('show');
-                
-                $('.star').raty({
-                    'click': function (score) {
-                        answers.push({
-                            category: $(this).attr('data-category'),
-                            value: score
-                        });
-                    }
-                });
-            };
-            
-            $.connection.hub.start().done(function() {
-                init_LoginR();
-            });
-        </script>
+        <script src="@Url.Content("~/Scripts/main-signalr.js")"></script>
     </body>
 </html>

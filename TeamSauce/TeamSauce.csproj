@@ -184,6 +184,7 @@
     <Content Include="cancel-on.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Scripts\main-signalr.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
