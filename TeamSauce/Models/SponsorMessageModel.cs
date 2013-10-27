@@ -11,5 +11,6 @@ namespace TeamSauce.Models
         public string Message { get; set; }
         public string Sender { get; set; }
         public DateTime Time { get; set; }
+        public string TeamId { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team Sauce</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+        <link href="@Url.Content("/Content/bootstrap.min.css")" rel="stylesheet" />
+        <link href="@Url.Content("/Content/jquery.atwho.css")" rel="stylesheet" />
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
+        <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
+
+    </head>
+    <body>
+        @{ Html.RenderPartial("_loginArea");}
+
+        <div id="app" style="display: none;">
+            <div class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">TeamSauce</a>
+                    </div>
+                    <div class="navbar-collapse collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activity <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                            </li>
+                            <li><a id="signout" href="#">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_Graphs"); }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        @{ Html.RenderPartial("_SponsorChat"); }
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            @{ Html.RenderPartial("_Questionnaire"); }
+        </div>
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
+        <script src='/signalr/js'></script>
+        <script src="@Url.Content("~/Scripts/jquery.raty.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/LoginR.js")"></script>
+        <script src="@Url.Content("~/Scripts/moment.js")"></script>
+        <script src="@Url.Content("~/Scripts/main-signalr.js")"></script>
+        <script src="~/Scripts/jquery.atwho.js"></script>
+        <script src="~/Scripts/jquery.caret.js"></script>
+
+        <script type="text/javascript">
+            $('.atwho').atwho({
+                at: "@Html.Raw("@")",
+                data: ["Josh", "Adam", "Olly", "James"],
+            });
+        </script>
+
+    </body>
+</html>

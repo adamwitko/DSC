@@ -11,7 +11,8 @@ namespace TeamSauce.Models.Factories
                     Message = message,
                     MessageType = user.UserType,
                     Sender = user.Name,
-                    Time = DateTime.UtcNow
+                    Time = DateTime.UtcNow,
+                    TeamId = user.TeamId
                 };
 
         }

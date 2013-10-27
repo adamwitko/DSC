@@ -29,6 +29,11 @@ namespace TeamSauce.Controllers
             return View();
         }
 
+        public ActionResult Sponsor()
+        {
+            return View();
+        }
+
         public ActionResult LogIn()
         {
             return View();
