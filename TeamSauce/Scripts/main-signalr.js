@@ -70,13 +70,13 @@
     proxy.client.messagesLoaded = function (messages) {
         for (var idx = 0; idx < messages.length; idx++) {
             if (messages[idx].MessageType == 'Sponsor') {
-                $('#sponsor-feed').append('<li class="feed-sponsor">' +
+                $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
                                 '<div><span class="name">' + messages[idx].Sender + '</span>' +
                                 '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
                                 '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
                                 '</li>');
             } else {
-                $('#sponsor-feed').append('<li>' +
+                $('#sponsor-feed').prepend('<li>' +
                    '<div><span class="name">' + messages[idx].Sender + ' (' + messages[idx].TeamId + ')' + '</span>' +
                     '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
                     '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
@@ -86,7 +86,7 @@
     };
 
     proxy.client.userMessage = function (message) {
-        $('#sponsor-feed').prepend('<li>' +
+        $('#sponsor-feed').appeand('<li>' +
            '<div><span class="name">' + message.Sender + ' (' + message.TeamId + ')' + '</span>' +
             '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
@@ -94,7 +94,7 @@
     };
 
     proxy.client.sponsorMessage = function (message) {
-        $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
+        $('#sponsor-feed').appeand('<li class="feed-sponsor">' +
             '<div><span class="name">' + message.Sender + '</span>' +
             '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
@@ -105,7 +105,7 @@
         questionnaireId = questionnaire.id;
 
         $.each(questionnaire.categoryQuestions, function (index, value) {
-            $('#questions').prepend('<div class="question">' +
+            $('#questions').appeand('<div class="question">' +
                 '<span class="glyphicon glyphicon-record"></span><span>' + value.text +
                 '</span><div class="star" data-category=' + value.category + '/></div>');
         });
