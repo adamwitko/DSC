@@ -1,4 +1,31 @@
 $(function () {
+    var somecoloursets = [
+        {
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(220,80,220,0.5)",
+            strokeColor: "rgba(220,80,220,1)",
+            pointColor: "rgba(220,80,220,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(220,220,80,0.5)",
+            strokeColor: "rgba(220,220,80,1)",
+            pointColor: "rgba(220,220,80,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(80,220,220,0.5)",
+            strokeColor: "rgba(80,220,220,1)",
+            pointColor: "rgba(80,220,220,1)",
+            pointStrokeColor: "#fff"
+        }
+    ];
+
     $.getJSON('/que/allaverage', function(data) {
         var labels = [];
         for (var i = 0; i < data.length; i++) {
@@ -16,13 +43,10 @@ $(function () {
 
         var datasets = [];
         for (var name in result) {
-            datasets[datasets.length] = {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "#fff",
-                data : result[name]
-            };
+            var colourset = somecoloursets.pop();
+            colourset.data = result[name];
+
+            datasets[datasets.length] = colourset;
         }
 
         var data = {
