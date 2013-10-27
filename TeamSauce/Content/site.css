@@ -74,6 +74,10 @@
     color: black;
 }
 
+.feed-sponsor {
+    background-color: rgba(255, 128, 0, 0.2);
+}
+
 .graph-key {
     width: 50px;
 }
