@@ -117,7 +117,6 @@
                 alert('Messages Returned' + messages + ':' + messages.length);
                 for (var idx = 0; idx < messages.length; idx++) {
                     if (messages[idx].MessageType == 'Sponsor') {
-
                         $('#sponsor-feed').append('<li class="feed-sponsor">' +
                             '<span class="name">' + messages[idx].Sender + '</span>' +
                             '<span class="body">' + messages[idx].Message + '</span>' +
@@ -135,7 +134,7 @@
             };
 
             proxy.client.userMessage = function (message) {
-                $('#sponsor-feed').append('<li>' +
+                $('#sponsor-feed').prepend('<li>' +
                     '<span class="name">' + message.Sender + '</span>' +
                     '<span class="body">' + message.Message + '</span>' +
                     '<time>' + message.Time + '</time>' +
@@ -143,7 +142,7 @@
             };
 
             proxy.client.sponsorMessage = function (message) {
-                $('#sponsor-feed').append('<li class="feed-sponsor">' +
+                $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
                     '<span class="name">' + message.Sender + '</span>' +
                     '<span class="body">' + message.Message + '</span>' +
                     '<time>' + message.Time + '</time>' +
