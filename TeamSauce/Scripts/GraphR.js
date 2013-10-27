@@ -24,7 +24,7 @@ $(function () {
                 pointColor: "rgba(80,220,220,1)",
                 pointStrokeColor: "#fff"
             }];
-        
+
         var ctx = document.getElementById("that-big-graph").getContext("2d");
 
         var opts = {

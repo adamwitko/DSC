@@ -80,7 +80,7 @@
             } else {
                 $('#sponsor-feed').append('<li>' +
                     '<div><span class="name">' + messages[idx].Sender + '</span>' +
-                    '<time>' + messages[idx].Time + '</time></div>' +
+                    '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
                     '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
                     '</li>');
             }
