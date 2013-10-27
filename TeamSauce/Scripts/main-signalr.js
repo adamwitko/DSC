@@ -83,29 +83,35 @@
                     '</li>');
             }
         }
+        
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight + 200);
     };
 
     proxy.client.userMessage = function (message) {
-        $('#sponsor-feed').appeand('<li>' +
+        $('#sponsor-feed').append('<li>' +
            '<div><span class="name">' + message.Sender + ' (' + message.TeamId + ')' + '</span>' +
             '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
+
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight);
     };
 
     proxy.client.sponsorMessage = function (message) {
-        $('#sponsor-feed').appeand('<li class="feed-sponsor">' +
+        $('#sponsor-feed').append('<li class="feed-sponsor">' +
             '<div><span class="name">' + message.Sender + '</span>' +
             '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
+        
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight);
     };
 
     proxy.client.sentOutQuestionnaire = function (questionnaire) {
         questionnaireId = questionnaire.id;
 
         $.each(questionnaire.categoryQuestions, function (index, value) {
-            $('#questions').appeand('<div class="question">' +
+            $('#questions').prepend('<div class="question">' +
                 '<span class="glyphicon glyphicon-record"></span><span>' + value.text +
                 '</span><div class="star" data-category=' + value.category + '/></div>');
         });

@@ -24,7 +24,8 @@ namespace TeamSauce.Services
                     Message = dto.Message,
                     MessageType = dto.MessageType,
                     Sender = dto.Sender,
-                    Time = dto.Time
+                    Time = dto.Time,
+                    TeamId = "SauceControl"
                 };
         }
     }
