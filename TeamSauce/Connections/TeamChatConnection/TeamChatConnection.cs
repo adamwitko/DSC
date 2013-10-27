@@ -47,12 +47,17 @@ namespace TeamSauce.Connections.TeamChatConnection
 
         protected override Task OnDisconnected(IRequest request, string connectionId)
         {
-            var name = _clients[connectionId];
-            var chatData = new TeamChatMessage("Server", string.Format("{0} has disconnected.", name));
-            
-            _clients.Remove(connectionId);
-            
-            return Connection.Broadcast(chatData);
+            if (_clients.ContainsKey(connectionId))
+            {
+                var name = _clients[connectionId];
+                var chatData = new TeamChatMessage("Server", string.Format("{0} has disconnected.", name));
+
+                _clients.Remove(connectionId);
+
+                return Connection.Broadcast(chatData);
+            }
+
+            return null;
         }
     }
 }
