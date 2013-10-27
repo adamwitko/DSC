@@ -3,25 +3,25 @@ $(function () {
         var somecoloursets = [{
                 fillColor: "rgba(220,220,220,0)",
                 strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,0.5)",
                 pointStrokeColor: "#fff"
             },
             {
                 fillColor: "rgba(220,80,220,0)",
                 strokeColor: "rgba(220,80,220,1)",
-                pointColor: "rgba(220,80,220,1)",
+                pointColor: "rgba(220,80,220,0.5)",
                 pointStrokeColor: "#fff"
             },
             {
                 fillColor: "rgba(220,220,80,0)",
                 strokeColor: "rgba(220,220,80,1)",
-                pointColor: "rgba(220,220,80,1)",
+                pointColor: "rgba(220,220,80,0.5)",
                 pointStrokeColor: "#fff"
             },
             {
                 fillColor: "rgba(80,220,220,0)",
                 strokeColor: "rgba(80,220,220,1)",
-                pointColor: "rgba(80,220,220,1)",
+                pointColor: "rgba(80,220,220,0.5)",
                 pointStrokeColor: "#fff"
             }];
 
@@ -70,7 +70,7 @@ $(function () {
             datasets[datasets.length] = colourset;
 
             graphKeysList.append('<li style="background-color:' +
-                colourset.fillColor + '">' +
+                colourset.pointColor + '">' +
                 '<span>' + name + '</span>' +
                 '</li>');
         }

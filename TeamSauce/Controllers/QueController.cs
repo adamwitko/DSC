@@ -67,7 +67,7 @@ namespace TeamSauce.Controllers
                                                               {"time", date.ToString("s")},
                                                               {"categories", properCatDic}
                                                           };
-                                           });
+                                           }).OrderBy(dic => dic["time"]);
             return Json(some, JsonRequestBehavior.AllowGet);
         }
 
