@@ -1,4 +1,5 @@
 ﻿body {
+    background-color: #F5F4ED;
 }
 
 .angular-ratings { overflow: hidden; *zoom: 1; list-style: none; padding: 0; margin: 0; }
@@ -95,4 +96,8 @@
     box-shadow: none;
     border: none;
     color: black;
+}
+
+.center-align {
+    text-align: center;
 }

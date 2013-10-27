@@ -54,10 +54,12 @@ namespace TeamSauce.Controllers
                                                var properCatDic = new Dictionary<string, int>();
                                                foreach (var kv in catDic)
                                                {
-                                                   properCatDic[kv.Key] =
-                                                       (int)
-                                                       Math.Round((float) kv.Value.Aggregate((a, e) => a + e)/
-                                                                  kv.Value.Count());
+                                                   if (!kv.Value.Any())
+                                                   {
+                                                       properCatDic[kv.Key] = 0;
+                                                       continue;
+                                                   }
+                                                   properCatDic[kv.Key] = (int) Math.Round((float) kv.Value.Aggregate((a, e) => a + e)/kv.Value.Count());
                                                }
 
                                                return new Dictionary<string, object>

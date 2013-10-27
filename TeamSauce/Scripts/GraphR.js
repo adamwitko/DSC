@@ -31,16 +31,16 @@ $(function () {
 
         var opts = {
             //Boolean - If we want to override with a hard coded scale
-            scaleOverride : true,
+            scaleOverride: true,
 
             //** Required if scaleOverride is true **
             //Number - The number of steps in a hard coded scale
-            scaleSteps : 10,
+            scaleSteps: 10,
             //Number - The value jump in the hard coded scale
-            scaleStepWidth : 1,
+            scaleStepWidth: 1,
             //Number - The scale starting value
-            scaleStartValue : 0
-        }
+            scaleStartValue: 0
+        };
 
         if (data.length < 1) {
             new Chart(ctx).Line({labels: [], datasets: []}, opts);
@@ -54,10 +54,10 @@ $(function () {
 
         // dict containing name of category with list of data points over time
         var result = {};
-        for (var name in data[0].categories) {
-            result[name] = [];
+        for (var category in data[0].categories) {
+            result[category] = [];
             for (var i = 0; i < data.length; i++) {
-                result[name][i] = data[i].categories[name];
+                result[category][i] = data[i].categories[category];
             }
         }
 
@@ -72,14 +72,8 @@ $(function () {
                                    colourset.fillColor + '">' +
                                    '<span>' + name + '</span>' +
                                    '</li>');
-
         }
 
-        var data = {
-            labels : labels,
-            datasets : datasets
-        }
-
-        new Chart(ctx).Line(data, opts);
+        new Chart(ctx).Line({ labels: labels, datasets: datasets}, opts);
     });
 });

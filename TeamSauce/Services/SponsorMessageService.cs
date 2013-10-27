@@ -28,7 +28,7 @@ namespace TeamSauce.Services
         {
             using (var store = new SponsorMessageDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]))
             {
-                var messages = store.GetMessages();
+                var messages = store.GetMessages().OrderByDescending(message => message.Time);
 
                 return messages.Select(sponsorMessageDto => 
                     new SponsorMessageTransformer().ToModel(sponsorMessageDto))

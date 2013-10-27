@@ -187,6 +187,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\TEAM-SAUCE.png" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\site.css" />
@@ -232,13 +233,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Home\_Graphs.cshtml" />
-    <Content Include="Views\Home\_HackInformation.cshtml" />
     <Content Include="Views\Home\_TeamChat.cshtml" />
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\_Questionnaire.cshtml" />
     <Content Include="Views\Cat\Index.cshtml" />
-    <Content Include="Views\Home\_Login.cshtml" />
+    <Content Include="Views\Home\_loginArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
