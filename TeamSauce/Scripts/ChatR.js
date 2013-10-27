@@ -7,7 +7,7 @@
             $('team-chatbox').append('<li>' +
                                  '<span class="name">' + message.Name + '</span>' +
                                  '<span class="body">' + message.Body + '</span>' +
-                                 '<time>' + message.Time + '</time>' +
+                                 '<time>' + moment(message.Time).fromNow() + '</time>' +
                                  '</li>');
         }
     });

@@ -20,7 +20,6 @@ namespace TeamSauce.Hubs
         private readonly IQuestionnaireResultService _questionnaireResultService;
 
         private readonly IHubConnectionContext _teamSauceHubContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
-        private readonly IHubConnectionContext _graphHubContext = GlobalHost.ConnectionManager.GetHubContext<GraphHub>().Clients;
 
 
         public TeamSauceHub()
@@ -72,6 +71,12 @@ namespace TeamSauce.Hubs
             _teamSauceHubContext.Client(Context.ConnectionId).MessagesLoaded(messages);
         }
 
+        public void GetData()
+        {
+            var calculatedQuestionnaireResultAverages = _questionnaireResultService.GetData();
+            Clients.Client(Context.ConnectionId).getData(calculatedQuestionnaireResultAverages);
+        }
+
         public void Complete(string questionnaireId, string data)
         {
             if (questionnaireId == null)
@@ -91,7 +96,7 @@ namespace TeamSauce.Hubs
 
             var calculatedQuestionnaireResultAverages = _questionnaireResultService.GetData();
 
-            _graphHubContext.All.GetData(calculatedQuestionnaireResultAverages);
+            _teamSauceHubContext.All.GetData(calculatedQuestionnaireResultAverages);
         }
     }
 }
