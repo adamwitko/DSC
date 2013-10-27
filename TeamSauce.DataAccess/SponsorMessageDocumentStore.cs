@@ -27,7 +27,7 @@ namespace TeamSauce.DataAccess
         public IEnumerable<SponsorMessageDto> GetMessages()
         {
             var collection = GetSponsorMessageCollection();
-            return collection.FindAll().ToList();
+            return collection.FindAll().OrderByDescending(message => message.Time).ToList();
         }
 
         public void PersistMessage(SponsorMessageDto message)
