@@ -51,10 +51,12 @@
     <Compile Include="CategoryDocumentStore.cs" />
     <Compile Include="Model\Questionnaire.cs" />
     <Compile Include="Model\SponsorMessageDto.cs" />
+    <Compile Include="Model\TeamMessageDto.cs" />
     <Compile Include="Model\UserDto.cs" />
     <Compile Include="QuestionnaireDocumentStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SponsorMessageDocumentStore.cs" />
+    <Compile Include="TeamMessageDocumentStore.cs" />
     <Compile Include="UserDocumentStore.cs" />
   </ItemGroup>
   <ItemGroup>

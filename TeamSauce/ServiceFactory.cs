@@ -5,13 +5,13 @@ namespace TeamSauce
 {
     public static class ServiceFactory
     {
-        private static MockTeamChatMessageService _mockTeamChatMessageService;
+        private static ITeamChatMessageService _mockTeamChatMessageService;
 
         private static IUserService _userService;
 
         public static ITeamChatMessageService GetTeamChatMessageService()
         {
-            return _mockTeamChatMessageService ?? (_mockTeamChatMessageService = new MockTeamChatMessageService());
+            return _mockTeamChatMessageService ?? (_mockTeamChatMessageService = new TeamChatMessageService());
         }
 
         public static IUserService GetUserService()
