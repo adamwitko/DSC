@@ -40,6 +40,10 @@ namespace TeamSauce.Hubs
             _userService.CreateUser(Context.ConnectionId, username, password);
         }
 
+        public void LogOut()
+        {
+        }
+
         public void MessageReceived(string message)
         {
             var sender = _userService.GetUser(Context.ConnectionId);

@@ -4,14 +4,11 @@
     var questionnaireId;
     
     var initLogin = function () {
-        $('#app').hide();
-
         $("#signin").click(function () {
             var username = $('#username').val();
             var password = $('#password').val();
             proxy.server.logIn(username, password);
         });
-        
     };
 
     var initSponsorChatR = function () {
@@ -38,8 +35,15 @@
     };
     
     proxy.client.completed = function (connectionId) {
-        $('#loginArea').hide();
+        $('#loginArea').toggle();
         $('#app').toggle();
+        $('.dropdown-toggle').dropdown();
+        
+        $('#signout').click(function() {
+            proxy.server.logOut();
+            $('#loginArea').toggle();
+            $('#app').toggle();
+        });
         
         initSponsorChatR();
         initQuestionnaireR();

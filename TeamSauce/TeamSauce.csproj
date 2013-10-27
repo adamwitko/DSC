@@ -145,7 +145,6 @@
     </Compile>
     <Compile Include="Hubs\SponsorChatHub.cs" />
     <Compile Include="Hubs\TeamSauceHub.cs" />
-    <Compile Include="Hubs\UsersHub.cs" />
     <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Models\CategoryQuestion.cs" />
     <Compile Include="Models\ChatData.cs" />
@@ -191,6 +190,7 @@
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\jquery.pnotify.js" />
     <Content Include="Scripts\jquery.pnotify.min.js" />
     <Content Include="Scripts\main-signalr.js" />

@@ -31,11 +31,15 @@
                     </div>
                     <div class="navbar-collapse collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a id="logout" href="#">Log out</a></li>
-                       
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activity <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                            </li>                            
+                            <li><a id="signout" href="#">Log out</a></li>
                         </ul>
-                    </div><!-- /.nav-collapse -->
-                </div><!-- /.container -->
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <div class="row">
@@ -44,13 +48,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         @{ Html.RenderPartial("_TeamChat"); }
                     </div>
-                    <div class="col-md-4">
-                        @{ Html.RenderPartial("_Activity"); }
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         @{ Html.RenderPartial("_SponsorChat"); }
                     </div>
                 </div>
@@ -67,5 +68,6 @@
         <script src="@Url.Content("~/Scripts/SponsorChatR.js")"></script>
         <script src="@Url.Content("~/Scripts/moment.js")"></script>
         <script src="@Url.Content("~/Scripts/main-signalr.js")"></script>
+
     </body>
 </html>
