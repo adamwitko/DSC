@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
 using TeamSauce.DataAccess;
 using TeamSauce.DataAccess.Model;
