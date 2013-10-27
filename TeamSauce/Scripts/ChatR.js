@@ -21,7 +21,7 @@
         .done(function () {
             $("#chat-submit").click(function() {
                 var body = $('.chat-message').val();
-                myConnection.send(JSON.stringify({ Name: "Josh", Body: body }));
+                myConnection.send(JSON.stringify({ Body: body }));
             });
         });
 

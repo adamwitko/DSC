@@ -36,7 +36,7 @@ namespace TeamSauce.DataAccess
                 var result = collection.FindAs<UserDto>(query);
                 return result.Single();
             }
-            catch (MongoConnectionException)
+            catch (Exception)
             {
                 return null;
             }
