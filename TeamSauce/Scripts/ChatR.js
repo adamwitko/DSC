@@ -24,4 +24,9 @@
                 myConnection.send(JSON.stringify({ Name: "Josh", Body: body }));
             });
         });
+
+     $('.atwho').atwho({
+         at: "@",
+         data: ["Josh", "Adam", "Olly", "James"],
+     });
 });

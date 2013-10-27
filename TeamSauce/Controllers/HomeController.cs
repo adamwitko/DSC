@@ -36,6 +36,8 @@ namespace TeamSauce.Controllers
 
         public void Admin()
         {
+            var random = new Random();
+
             var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
             var questionnaire = new Questionnaire { date = DateTime.UtcNow };
             documentStore.UpsertQuestionnaire(questionnaire);
@@ -49,7 +51,7 @@ namespace TeamSauce.Controllers
                     categoryQuestions = categories.Select(c => new CategoryQuestion
                         {
                             category = c.categorytype,
-                            text = c.categoryquestions[new Random().Next(0, c.categoryquestions.Count() - 1)].text
+                            text = c.categoryquestions[random.Next(0, c.categoryquestions.Count() - 1)].text
                         }).ToList()
                 };
 
