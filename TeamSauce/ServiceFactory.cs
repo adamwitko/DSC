@@ -7,14 +7,16 @@ namespace TeamSauce
     {
         private static MockTeamChatMessageService _mockTeamChatMessageService;
 
+        private static IUserService _userService;
+
         public static ITeamChatMessageService GetTeamChatMessageService()
         {
-            if (_mockTeamChatMessageService == null)
-            {
-                _mockTeamChatMessageService = new MockTeamChatMessageService();
-            }
+            return _mockTeamChatMessageService ?? (_mockTeamChatMessageService = new MockTeamChatMessageService());
+        }
 
-            return _mockTeamChatMessageService;
+        public static IUserService GetUserService()
+        {
+            return _userService ?? (_userService = new UserService());
         }
     }
 }

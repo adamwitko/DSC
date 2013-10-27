@@ -1,42 +1,80 @@
 $(function () {
+    var somecoloursets = [
+        {
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(220,80,220,0.5)",
+            strokeColor: "rgba(220,80,220,1)",
+            pointColor: "rgba(220,80,220,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(220,220,80,0.5)",
+            strokeColor: "rgba(220,220,80,1)",
+            pointColor: "rgba(220,220,80,1)",
+            pointStrokeColor: "#fff"
+        },
+        {
+            fillColor: "rgba(80,220,220,0.5)",
+            strokeColor: "rgba(80,220,220,1)",
+            pointColor: "rgba(80,220,220,1)",
+            pointStrokeColor: "#fff"
+        }
+    ];
+
     $.getJSON('/que/allaverage', function(data) {
-        var greatData = {};
-
+        var labels = [];
         for (var i = 0; i < data.length; i++) {
-            var q = data[i], time = q.time, cats = q.categories;
+            labels[labels.length] = data[i].time;
+        }
 
-            for (var name in cats) {
-                if (greatData[name]) {
-                    greatData[name] += [cats[name]];
-                } else {
-                    greatData[name] = [cats[name]];
-                }
+        // dict containing name of category with list of data points over time
+        var result = {};
+        for (var name in data[0].categories) {
+            result[name] = [];
+            for (var i = 0; i < data.length; i++) {
+                result[name][i] = data[i].categories[name];
             }
         }
 
-        var names = [];
-        for (var name in greatData) {
-            names[names.length] += name;
-        }
-
         var datasets = [];
-        for (var name in greatData) {
-            datasets[datasets.length] = {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "#fff",
-                data : greatData[name]
-            };
+        for (var name in result) {
+            var colourset = somecoloursets.pop();
+            colourset.data = result[name];
+
+            datasets[datasets.length] = colourset;
+
+            $('.graph-key ul').append('<li style="background-color:' +
+                                   colourset.fillColor + '">' +
+                                   '<span>' + name + '</span>' +
+                                   '</li>');
+
         }
 
         var data = {
-            labels : names,
+            labels : labels,
             datasets : datasets
         }
 
         var ctx = document.getElementById("that-big-graph").getContext("2d");
 
-        new Chart(ctx).Line(data);
+        var opts = {
+            //Boolean - If we want to override with a hard coded scale
+            scaleOverride : true,
+
+            //** Required if scaleOverride is true **
+            //Number - The number of steps in a hard coded scale
+            scaleSteps : 10,
+            //Number - The value jump in the hard coded scale
+            scaleStepWidth : 1,
+            //Number - The scale starting value
+            scaleStartValue : 0
+        }
+
+        new Chart(ctx).Line(data, opts);
     });
 });
