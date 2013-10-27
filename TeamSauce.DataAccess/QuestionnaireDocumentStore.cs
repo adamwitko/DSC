@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using TeamSauce.DataAccess.Model;
 using Teamsace.DataAccess.Model;
 
@@ -41,12 +43,12 @@ namespace TeamSauce.DataAccess
         }
 
 
-        public void CreateQuestionnaire(Questionnaire questionnaire)
+        public void UpsertQuestionnaire(Questionnaire questionnaire)
         {
             MongoCollection<Questionnaire> collection = GetQuestionnaireCollection();
             try
             {
-                collection.Insert(questionnaire, WriteConcern.Acknowledged);
+                collection.Save(questionnaire, WriteConcern.Acknowledged);
             }
             catch (MongoCommandException ex)
             {
@@ -54,22 +56,22 @@ namespace TeamSauce.DataAccess
             }
         }
 
-       /* public Questionnaire FindQuestionnaire(Guid id)
+        public Questionnaire FindQuestionnaire(string id)
         {
+            MongoCollection<Questionnaire> collection = GetQuestionnaireCollection();
+            var query = Query<Questionnaire>.EQ(e => e.Id, id);
+
             try
             {
-                MongoClient mongoClient = new MongoClient(_connectionString);
-                _mongoServer = mongoClient.GetServer();
-                MongoDatabase database = _mongoServer.GetDatabase(_dbName);
-                MongoCollection<Questionnaire> notesCollection = database.G<Questionnaire>(_collectionName);
-
+                Questionnaire findQuestionnaire = collection.FindOne(query);
+                return findQuestionnaire;
             }
-            catch (Exception ex)
+            catch (MongoConnectionException ex)
             {
-                throw new QuestionnaireNotFoundException();
+                string msg = ex.Message;
             }
-            
-        }*/
+            return null;
+        }
 
         private MongoCollection<Questionnaire> GetQuestionnaireCollection()
         {

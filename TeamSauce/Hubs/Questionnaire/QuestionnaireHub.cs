@@ -4,7 +4,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
 using TeamSauce.DataAccess;
-using TeamSauce.Hubs.Questionnaire.Data;
+using TeamSauce.DataAccess.Model;
 
 namespace TeamSauce.Hubs.Questionnaire
 {
@@ -15,7 +15,14 @@ namespace TeamSauce.Hubs.Questionnaire
         {
             var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
 
-            var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            using(var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]))
+            {
+                var questionnaire = documentStore.FindQuestionnaire(questionnaireId.ToString());
+
+                questionnaire.questionnaireresponses.Add(questionnaireResponse);
+
+                documentStore.UpsertQuestionnaire(questionnaire);                
+            }
         }
     }
 }

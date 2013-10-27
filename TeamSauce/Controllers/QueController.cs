@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TeamSauce.DataAccess;
 using TeamSauce.DataAccess.Model;
-using Teamsace.DataAccess.Model;
 
 namespace TeamSauce.Controllers
 {
@@ -24,7 +21,7 @@ namespace TeamSauce.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public JsonResult Create()
         {
 
             var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
@@ -33,18 +30,48 @@ namespace TeamSauce.Controllers
                                     {
                                         date = DateTime.UtcNow
                                     };
-            mongoStore.CreateQuestionnaire(questionnaire);
+            mongoStore.UpsertQuestionnaire(questionnaire);
 
-            return RedirectToAction("Index");
+            return Json(questionnaire, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult AddQuestionnaireResultForUserName(string username)
+        public JsonResult GetQuestionnaireById(string questionnaireId)
         {
-         //   var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
-            return null;
+            var q = mongoStore.FindQuestionnaire(questionnaireId);
 
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult AddQuestionnaireResponsesToQuestionaire(string questionnaireId )
+        {
+            var mongoStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+
+            var q = mongoStore.FindQuestionnaire(questionnaireId);
+
+            if (q.questionnaireresponses == null)
+                q.questionnaireresponses = new List<QuestionnaireResponse>();
+
+            q.questionnaireresponses.Add( new QuestionnaireResponse()
+                                                   {
+                                                       username = "dfasdfasdfasdfasdfasdffasdfa",
+                                                       ratings = new List<Rating>()
+                                                                     {
+                                                                         new Rating()
+                                                                             {
+                                                                                 categorytype = "CATS",
+                                                                                 value = "5"
+                                                                             }
+                                                                     }
+                                                   }
+                                           );
+
+            mongoStore.UpsertQuestionnaire(q);
+
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
     }
 }

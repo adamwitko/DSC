@@ -1,4 +1,4 @@
-﻿var app = angular.module('teamsauce', ['ratings']);
+﻿var app = angular.module('teamsauce', ['ratings', 'ui.bootstrap']);
 
 app.controller('testCtrl', function ($scope) {
     $scope.user_rating = 0;
@@ -12,23 +12,27 @@ app.controller('questionnaireCtrl', ['$scope', '$rootScope', function ($scope, $
 
     $.connection.hub.start();
 
-    $scope.questions = [
-        { categoryType: "Hunger", text: 'How hungry are you feeling?' },
-        { categoryType: "Cats", text: 'How does this cat make you feel?' }];
-
     $rootScope.$on('ratingUpdate', function (broadcastData, answer) {
         answers.push(answer);
     });
 
+    proxy.client.sentOutQuestionnaire = function (questionnaire) {
+        $scope.questionnaire = questionnaire;
+        $scope.questions = $scope.questionnaire.categoryQuestions;
+
+        $('#mymodal').modal('show');
+        
+        $scope.$apply();
+    };
+    
     $scope.go = function() {
-
-        var questionnaireId = "4f231fec-afbf-421b-a6c8-8caceeb745ae";
-
         var questionnaireResponse = {
-            username: "Adam",
             ratings: answers
         };
 
-        proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
+        proxy.server.complete($scope.questionnaire.id, JSON.stringify(questionnaireResponse));
+        
+        answers = [];
+        $('#mymodal').modal('hide');
     };
 }]);
