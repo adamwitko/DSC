@@ -194,6 +194,7 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\TEAM-SAUCE.png" />
     <Content Include="Content\jquery.pnotify.css" />
+    <Content Include="Content\jquery.pnotify.default.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\jquery.atwho.css" />

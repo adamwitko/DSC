@@ -102,6 +102,13 @@ namespace TeamSauce.Hubs
 
             var calculatedQuestionnaireResultAverages = _questionnaireResultService.GetData();
 
+            var notificationData = new
+            {
+                title = "Questionnaire completed",
+                text = "By " + ServiceFactory.GetUserService().GetUser(Context.ConnectionId).Name
+            };
+            _teamSauceHubContext.All.showQuestionnaireCompleteNotification(notificationData);
+
             _teamSauceHubContext.All.GetData(calculatedQuestionnaireResultAverages);
         }
 
@@ -121,5 +128,7 @@ namespace TeamSauce.Hubs
             var teamMessages = _teamChatMessageService.GetTeamMessages(Context.ConnectionId);
             _teamSauceHubContext.Client(Context.ConnectionId).TeamMessages(teamMessages);
         }
+
+
     }
 }

@@ -81,6 +81,14 @@ $(function () {
     var proxy = $.connection.teamSauceHub;
     
     proxy.client.getData = updateGraph;
+    
+    proxy.client.showQuestionnaireCompleteNotification = function (data) {
+        $.pnotify.defaults.history = false;
+        $.pnotify({
+            title: data.title,
+            text: data.text
+        });
+    };
 
     $.connection.hub.start().done(function () {
         proxy.server.getData();
