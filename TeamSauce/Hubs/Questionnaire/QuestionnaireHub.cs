@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
@@ -11,15 +13,18 @@ namespace TeamSauce.Hubs.Questionnaire
     [HubName("questionnaireHub")]
     public class QuestionnaireHub : Hub
     {
-        public void Complete(Guid questionnaireId, string data)
+        public void Complete(string questionnaireId, string data)
         {
             var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
 
             using(var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]))
             {
-                var questionnaire = documentStore.FindQuestionnaire(questionnaireId.ToString());
+                var questionnaire = documentStore.FindQuestionnaire(questionnaireId);
 
-                questionnaire.questionnaireresponses.Add(questionnaireResponse);
+                if (questionnaire.questionnaireresponses == null)
+                    questionnaire.questionnaireresponses = new List<QuestionnaireResponse> { questionnaireResponse };
+                else
+                    questionnaire.questionnaireresponses.Add(questionnaireResponse);
 
                 documentStore.UpsertQuestionnaire(questionnaire);                
             }
