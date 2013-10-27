@@ -5,6 +5,7 @@
     
     var initLogin = function () {
         $("#signin").click(function () {
+            $(this).prop("disabled", !$(this).prop("disabled"));
             var username = $('#username').val();
             var password = $('#password').val();
             proxy.server.logIn(username, password);
@@ -55,6 +56,13 @@
         
         $('#signout').click(function() {
             proxy.server.logOut();
+            
+            var signIn = $('#signin');
+            signIn.text("Sign in");
+            signIn.prop("disabled", !signIn.prop("disabled"));
+            $('#username').val("");
+            $('#password').val("");
+            
             $('#loginArea').toggle();
             $('#app').toggle();
         });
@@ -64,7 +72,9 @@
     };
 
     proxy.client.loginFailed = function (connectionId) {
-        alert('Fail ' + connectionId);
+        var signIn = $('#signin');
+        signIn.text("Failed to sign in. Try again!");
+        signIn.prop("disabled", !signIn.prop("disabled"));
     };
 
     proxy.client.messagesLoaded = function (messages) {
