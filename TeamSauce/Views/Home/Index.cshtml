@@ -21,25 +21,23 @@
 
             <input type="button" id="log-in"/>
         </div>
-
-        <div class="row-fluid">
-            <div class="col-xs-12 col-sm-6 col-md-8">
+        <div class="row">
+            <div class="col-md-8">
                 @{ Html.RenderPartial("_Graphs"); }
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-4">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_HackInformation"); }
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_TeamChat"); }
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-4">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_Activity"); }
             </div>
+            <div class="col-md-4">
 
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-4">
                 @{ Html.RenderPartial("_SponsorChat"); }
             </div>
         </div>
@@ -111,18 +109,18 @@
 
             proxy.client.userMessage = function (message) {
                 $('#sponsor-feed').append('<li>' +
-                                         '<span class="name">' + message.Sender + '</span>' +
-                                         '<span class="body">' + message.Message + '</span>' +
-                                         '<time>' + message.Time + '</time>' +
-                                         '</li>');
+                    '<span class="name">' + message.Sender + '</span>' +
+                    '<span class="body">' + message.Message + '</span>' +
+                    '<time>' + message.Time + '</time>' +
+                    '</li>');
             };
 
             proxy.client.sponsorMessage = function (message) {
                 $('#sponsor-feed').append('<li>' +
-                                         '<span class="name">' + message.Sender + '</span>' +
-                                         '<span class="body">' + message.Message + '</span>' +
-                                         '<time>' + message.Time + '</time>' +
-                                         '</li>');
+                    '<span class="name">' + message.Sender + '</span>' +
+                    '<span class="body">' + message.Message + '</span>' +
+                    '<time>' + message.Time + '</time>' +
+                    '</li>');
             };
 
             $.connection.hub.start().done(function() {
