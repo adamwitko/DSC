@@ -30,6 +30,7 @@
 
             answers = [];
             questionnaireId = undefined;
+            $('#questions').empty();
             $('#questionnaireModal').modal('hide');
         });
     };
@@ -93,7 +94,7 @@
         questionnaireId = questionnaire.id;
 
         $.each(questionnaire.categoryQuestions, function (index, value) {
-            $('#questions').append('<div class="question" ng-repeat="question in questions">' +
+            $('#questions').append('<div class="question">' +
                 '<span class="glyphicon glyphicon-record"></span><span>' + value.text +
                 '</span><div class="star" data-category=' + value.category + '/></div>');
         });
@@ -101,6 +102,7 @@
         $('#questionnaireModal').modal('show');
 
         $('.star').raty({
+            number: 10,
             'click': function (score) {
                 answers.push({
                     categorytype: $(this).attr('data-category'),
