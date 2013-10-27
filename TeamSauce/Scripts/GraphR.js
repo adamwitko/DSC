@@ -1,32 +1,27 @@
 $(function () {
     $.getJSON('/que/allaverage', function(data) {
-        var greatData = {};
+        var names = [];
+        for (var name in data[0].categories) {
+            names[names.length] = name;
+        }
 
-        for (var i = 0; i < data.length; i++) {
-            var q = data[i], time = q.time, cats = q.categories;
-
-            for (var name in cats) {
-                if (greatData[name]) {
-                    greatData[name] += [cats[name]];
-                } else {
-                    greatData[name] = [cats[name]];
-                }
+        // dict containing name of category with list of data points over time
+        var result = {};
+        for (var name in data[0].categories) {
+            result[name] = [];
+            for (var i = 0; i < data.length; i++) {
+                result[name][i] = data[i].categories[name];
             }
         }
 
-        var names = [];
-        for (var name in greatData) {
-            names[names.length] += name;
-        }
-
         var datasets = [];
-        for (var name in greatData) {
+        for (var name in result) {
             datasets[datasets.length] = {
                 fillColor : "rgba(220,220,220,0.5)",
                 strokeColor : "rgba(220,220,220,1)",
                 pointColor : "rgba(220,220,220,1)",
                 pointStrokeColor : "#fff",
-                data : greatData[name]
+                data : result[name]
             };
         }
 
