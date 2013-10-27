@@ -17,22 +17,25 @@ namespace TeamSauce.Hubs
         private readonly IUserService _userService;
         private readonly ISponsorMessageService _sponsorMessageService;
         private readonly ISponsorMessageModelFactory _modelFactory;
+        private readonly IQuestionnaireResultService _questionnaireResultService;
 
-        private readonly IHubConnectionContext _clientContext =
-            GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
+        private readonly IHubConnectionContext _teamSauceHubContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
+        private readonly IHubConnectionContext _graphHubContext = GlobalHost.ConnectionManager.GetHubContext<GraphHub>().Clients;
+
 
         public TeamSauceHub()
-            : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory())
+            : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory(), new QuestionnaireResultsService())
         {
-            
         }
 
         public TeamSauceHub(IUserService userService, ISponsorMessageService sponsorMessageService, 
-            ISponsorMessageModelFactory modelFactory)
+            ISponsorMessageModelFactory modelFactory, IQuestionnaireResultService questionnaireResultService)
         {
             _userService = userService;
             _sponsorMessageService = sponsorMessageService;
             _modelFactory = modelFactory;
+            _questionnaireResultService = questionnaireResultService;
+
         }
 
         public void LogIn(string username, string password)
@@ -55,10 +58,10 @@ namespace TeamSauce.Hubs
             switch (sender.UserType)
             {
                 case "User":
-                    _clientContext.All.UserMessage(sponsorMessageModel);
+                    _teamSauceHubContext.All.UserMessage(sponsorMessageModel);
                     break;
                 case "Sponsor":
-                    _clientContext.All.SponsorMessage(sponsorMessageModel);
+                    _teamSauceHubContext.All.SponsorMessage(sponsorMessageModel);
                     break;
             }
         }
@@ -66,11 +69,14 @@ namespace TeamSauce.Hubs
         public void GetMessages()
         {
             var messages = _sponsorMessageService.GetMessages();
-            _clientContext.Client(Context.ConnectionId).MessagesLoaded(messages);
+            _teamSauceHubContext.Client(Context.ConnectionId).MessagesLoaded(messages);
         }
 
         public void Complete(string questionnaireId, string data)
         {
+            if (questionnaireId == null)
+                return;
+
             var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
 
             var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
@@ -82,6 +88,10 @@ namespace TeamSauce.Hubs
                 questionnaire.questionnaireresponses.Add(questionnaireResponse);
 
             documentStore.UpsertQuestionnaire(questionnaire);
+
+            var calculatedQuestionnaireResultAverages = _questionnaireResultService.GetData();
+
+            _graphHubContext.All.GetData(calculatedQuestionnaireResultAverages);
         }
     }
 }

@@ -26,7 +26,9 @@ $(function () {
         }
     ];
 
-    $.getJSON('/que/allaverage', function(data) {
+    var proxy = $.connection.graphHub;
+
+    proxy.client.getData = function(data) {
         var ctx = document.getElementById("that-big-graph").getContext("2d");
 
         var opts = {
@@ -43,7 +45,7 @@ $(function () {
         };
 
         if (data.length < 1) {
-            new Chart(ctx).Line({labels: [], datasets: []}, opts);
+            new Chart(ctx).Line({ labels: [], datasets: [] }, opts);
             return;
         }
 
@@ -53,7 +55,7 @@ $(function () {
         }
 
         // dict containing name of category with list of data points over time
-        var result = {};
+        var result = { };
         for (var category in data[0].categories) {
             result[category] = [];
             for (var i = 0; i < data.length; i++) {
@@ -69,11 +71,13 @@ $(function () {
             datasets[datasets.length] = colourset;
 
             $('.graph-key ul').append('<li style="background-color:' +
-                                   colourset.fillColor + '">' +
-                                   '<span>' + name + '</span>' +
-                                   '</li>');
+                colourset.fillColor + '">' +
+                '<span>' + name + '</span>' +
+                '</li>');
         }
 
-        new Chart(ctx).Line({ labels: labels, datasets: datasets}, opts);
-    });
+        new Chart(ctx).Line({ labels: labels, datasets: datasets }, opts);
+    };
+
+    $.connection.hub.start();
 });
