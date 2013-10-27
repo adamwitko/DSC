@@ -5,7 +5,6 @@
     
     var initLogin = function () {
         $("#signin").click(function () {
-            $(this).prop("disabled", !$(this).prop("disabled"));
             var username = $('#username').val();
             var password = $('#password').val();
             proxy.server.logIn(username, password);
