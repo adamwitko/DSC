@@ -69,6 +69,7 @@
 
             proxy.client.completed = function (connectionId) {
                 alert(connectionId);
+                init_SponsorChatR();
             };
 
             proxy.client.loginFailed = function (connectionId) {
@@ -82,10 +83,28 @@
                     proxy.server.messageReceived(body);
                 });
 
-                proxy.server.getMessages().done(function (messages) {
-                    alert(messages);
-                });
+                proxy.server.getMessages();
             };
+
+            proxy.client.messagesLoaded = function (messages) {
+                alert('Messages Returned' + messages + ':' + messages.length);
+                for (var idx = 0; idx < messages.length; idx++) {
+                    if (messages[idx].MessageType == 'Sponsor') {
+                        $('#sponsor-feed').append('<li>' +
+                                         '<span class="name">' + messages[idx].Sender + '</span>' +
+                                         '<span class="body">' + messages[idx].Message + '</span>' +
+                                         '<time>' + messages[idx].Time + '</time>' +
+                                         '</li>');
+                    } else {
+                        $('#sponsor-feed').append('<li>' +
+                                        '<span class="name">' + messages[idx].Sender + '</span>' +
+                                        '<span class="body">' + messages[idx].Message + '</span>' +
+                                        '<time>' + messages[idx].Time + '</time>' +
+                                        '</li>');
+                    }
+                }
+            };
+
 
             proxy.client.userMessage = function (message) {
                 $('#sponsor-feed').append('<li>' +
@@ -105,7 +124,6 @@
 
             $.connection.hub.start().done(function() {
                 init_LoginR();
-                init_SponsorChatR();
             });
         </script>
     </body>
