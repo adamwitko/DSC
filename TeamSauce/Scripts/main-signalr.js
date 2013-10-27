@@ -11,10 +11,23 @@
         });
     };
 
+    var sponsorChatEnabled = true;
+
     var initSponsorChatR = function () {
         $("#send-sponsor-message").click(function () {
-            var body = $('#sponsor-message').val();
-            proxy.server.messageReceived(body);
+            if (sponsorChatEnabled) {
+                var body = $('#sponsor-message').val();
+                $('#sponsor-message').val('');
+                $('#send-sponsor-message').val('Sending...');
+                $('#send-sponsor-message').addClass('btn-disabled');
+
+                sponsorChatEnabled = false;
+                proxy.server.messageReceived(body).done(function() {
+                    $('#send-sponsor-message').val('Send');
+                    $('#send-sponsor-message').removeClass('btn-disabled');
+                    sponsorChatEnabled = true;
+                });
+            }
         });
 
         proxy.server.getMessages();
