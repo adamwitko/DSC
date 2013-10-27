@@ -47,7 +47,7 @@ $(function () {
 
         var labels = [];
         for (var i = 0; i < data.length; i++) {
-            labels[labels.length] = data[i].time;
+            labels[labels.length] = moment(data[i].time).fromNow();
         }
 
         // dict containing name of category with list of data points over time
