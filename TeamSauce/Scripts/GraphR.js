@@ -1,5 +1,4 @@
 $(function () {
-
     $.getJSON('/que/allaverage', function(data) {
         var greatData = {};
 
@@ -17,18 +16,18 @@ $(function () {
 
         var names = [];
         for (var name in greatData) {
-            names += [name];
+            names[names.length] += name;
         }
 
         var datasets = [];
         for (var name in greatData) {
-            datasets += [{
+            datasets[datasets.length] = {
                 fillColor : "rgba(220,220,220,0.5)",
                 strokeColor : "rgba(220,220,220,1)",
                 pointColor : "rgba(220,220,220,1)",
                 pointStrokeColor : "#fff",
                 data : greatData[name]
-            }];
+            };
         }
 
         var data = {
