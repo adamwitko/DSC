@@ -84,7 +84,7 @@
             }
         }
         
-        $('#team-chatbox').scrollTop($('#team-chatbox')[0].scrollHeight + 200);
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight + 200);
     };
 
     proxy.client.userMessage = function (message) {
@@ -94,8 +94,7 @@
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
 
-        alert($('#team-chatbox')[0].scrollHeight);
-        $('#team-chatbox').scrollTop($('#team-chatbox')[0].scrollHeight);
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight);
     };
 
     proxy.client.sponsorMessage = function (message) {
@@ -105,7 +104,7 @@
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
         
-        $('#team-chatbox').scrollTop($('#team-chatbox')[0].scrollHeight);
+        $('#sponsor-feed-holder').scrollTop($('#sponsor-feed-holder')[0].scrollHeight);
     };
 
     proxy.client.sentOutQuestionnaire = function (questionnaire) {
