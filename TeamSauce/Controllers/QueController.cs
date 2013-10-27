@@ -8,6 +8,9 @@ using TeamSauce.DataAccess.Model;
 
 namespace TeamSauce.Controllers
 {
+
+        //
+        // GET: /Mongo/
     public class QueController : Controller
     {
         //
@@ -28,7 +31,7 @@ namespace TeamSauce.Controllers
 
             var listOfQs = mongoStore.GetAllQuestionnaires();
 
-            var some = listOfQs.Select(q =>
+            var some = listOfQs.Where(x => x.questionnaireresponses != null).Select(q =>
                                            {
                                                var catDic = new Dictionary<string, IList<int>>();
                                                var date = q.date;
