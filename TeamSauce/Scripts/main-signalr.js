@@ -90,7 +90,7 @@
     proxy.client.userMessage = function (message) {
         $('#sponsor-feed').prepend('<li>' +
             '<div><span class="name">' + message.Sender + '</span>' +
-            '<time>' + message.Time + '</time></div>' +
+            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
@@ -98,7 +98,7 @@
     proxy.client.sponsorMessage = function (message) {
         $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
             '<div><span class="name">' + message.Sender + '</span>' +
-            '<time>' + message.Time + '</time></div>' +
+            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
