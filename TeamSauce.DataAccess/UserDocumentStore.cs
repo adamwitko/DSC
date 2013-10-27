@@ -26,19 +26,19 @@ namespace TeamSauce.DataAccess
             _connectionString = connectionstring;
         }
 
-        public bool IsUserValid(string username, string password)
+        public UserDto IsUserValid(string username, string password)
         {
             try
             {
                 var query = Query<UserDto>.EQ(user => user.Username, username);
                 
                 var collection = GetUserCollection();
-                var result = collection.FindAs<UserDto>(query).Any();
-                return result;
+                var result = collection.FindAs<UserDto>(query);
+                return result.Single();
             }
             catch (MongoConnectionException)
             {
-                return false;
+                return null;
             }
         }
 

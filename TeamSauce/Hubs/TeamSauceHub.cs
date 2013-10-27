@@ -17,7 +17,7 @@ namespace TeamSauce.Hubs
             GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
 
         public TeamSauceHub()
-            : this(new UserService(), new SponsorMessageService(), new SponsorMessageModelFactory())
+            : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory())
         {
             
         }
