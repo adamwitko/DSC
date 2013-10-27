@@ -1,36 +1,48 @@
 ﻿$(function () {
     var proxy = $.connection.teamSauceHub;
-
-    $.pnotify({
-        title: 'Regular Notice',
-        text: 'Check me out! I\'m a notice.'
-    });
+    var answers = [];
+    var questionnaireId;
     
-    var init_LoginR = function () {
-        $("#log-in").click(function () {
+    var initLogin = function () {
+        $("#loginModal").modal('show');
+        
+        $("#login").click(function () {
             var name = $('#username').val();
             var password = $('#password').val();
             proxy.server.logIn(name, password);
         });
     };
 
-    proxy.client.completed = function (connectionId) {
-        init_SponsorChatR();
-        init_QuestionnaireR();
-    };
-
-    proxy.client.loginFailed = function (connectionId) {
-        alert('Fail ' + connectionId);
-    };
-
-    var init_SponsorChatR = function () {
-
+    var initSponsorChatR = function () {
         $("#send-sponsor-message").click(function () {
             var body = $('#sponsor-message').val();
             proxy.server.messageReceived(body);
         });
 
         proxy.server.getMessages();
+    };
+    
+    var initQuestionnaireR = function () {
+        $('#submitQuestionnaire').click(function () {
+            var questionnaireResponse = {
+                ratings: answers
+            };
+
+            proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
+
+            answers = [];
+            questionnaireId = undefined;
+            $('#questionnaireModal').modal('hide');
+        });
+    };
+    
+    proxy.client.completed = function (connectionId) {
+        initSponsorChatR();
+        initQuestionnaireR();
+    };
+
+    proxy.client.loginFailed = function (connectionId) {
+        alert('Fail ' + connectionId);
     };
 
     proxy.client.messagesLoaded = function (messages) {
@@ -69,23 +81,6 @@
             '</li>');
     };
 
-    var answers = [];
-    var questionnaireId;
-
-    var init_QuestionnaireR = function () {
-        $('#submitQuestionnaire').click(function () {
-            var questionnaireResponse = {
-                ratings: answers
-            };
-
-            proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
-
-            answers = [];
-            questionnaireId = undefined;
-            $('#mymodal').modal('hide');
-        });
-    };
-
     proxy.client.sentOutQuestionnaire = function (questionnaire) {
         questionnaireId = questionnaire.id;
 
@@ -95,7 +90,7 @@
                 '</span><div class="star" data-category=' + value.category + '/></div>');
         });
 
-        $('#mymodal').modal('show');
+        $('#questionnaireModal').modal('show');
 
         $('.star').raty({
             'click': function (score) {
@@ -108,6 +103,6 @@
     };
 
     $.connection.hub.start().done(function () {
-        init_LoginR();
+        initLogin();
     });
 });

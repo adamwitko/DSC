@@ -234,11 +234,11 @@
     <Content Include="Views\Home\_Graphs.cshtml" />
     <Content Include="Views\Home\_HackInformation.cshtml" />
     <Content Include="Views\Home\_TeamChat.cshtml" />
-    <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Home\_Activity.cshtml" />
     <Content Include="Views\Home\_SponsorChat.cshtml" />
     <Content Include="Views\Home\_Questionnaire.cshtml" />
     <Content Include="Views\Cat\Index.cshtml" />
+    <Content Include="Views\Home\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
