@@ -58,16 +58,16 @@
             if (messages[idx].MessageType == 'Sponsor') {
 
                 $('#sponsor-feed').append('<li class="feed-sponsor">' +
-                                 '<span class="name">' + messages[idx].Sender + '</span>' +
-                                 '<span class="body">' + messages[idx].Message + '</span>' +
-                                 '<time>' + messages[idx].Time + '</time>' +
-                                 '</li>');
+                                '<div><span class="name">' + messages[idx].Sender + '</span>' +
+                                '<time>' + messages[idx].Time + '</time></div>' +
+                                '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
+                                '</li>');
 
             } else {
                 $('#sponsor-feed').append('<li>' +
-                    '<span class="name">' + messages[idx].Sender + '</span>' +
-                    '<span class="body">' + messages[idx].Message + '</span>' +
-                    '<time>' + messages[idx].Time + '</time>' +
+                    '<div><span class="name">' + messages[idx].Sender + '</span>' +
+                    '<time>' + messages[idx].Time + '</time></div>' +
+                    '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
                     '</li>');
             }
         }
@@ -75,17 +75,17 @@
 
     proxy.client.userMessage = function (message) {
         $('#sponsor-feed').append('<li>' +
-            '<span class="name">' + message.Sender + '</span>' +
-            '<span class="body">' + message.Message + '</span>' +
-            '<time>' + message.Time + '</time>' +
+            '<div><span class="name">' + message.Sender + '</span>' +
+            '<time>' + message.Time + '</time></div>' +
+            '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
 
     proxy.client.sponsorMessage = function (message) {
         $('#sponsor-feed').append('<li class="feed-sponsor">' +
-            '<span class="name">' + message.Sender + '</span>' +
-            '<span class="body">' + message.Message + '</span>' +
-            '<time>' + message.Time + '</time>' +
+            '<div><span class="name">' + message.Sender + '</span>' +
+            '<time>' + message.Time + '</time></div>' +
+            '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
 

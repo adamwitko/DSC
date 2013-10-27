@@ -97,6 +97,10 @@
     color: black;
 }
 
+.feed-body-div {
+    margin-top: 15px;
+}
+
 .center-align {
     text-align: center;
 }
