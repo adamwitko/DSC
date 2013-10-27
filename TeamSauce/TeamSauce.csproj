@@ -144,13 +144,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\SponsorChatHub.cs" />
+    <Compile Include="Hubs\TeamSauceHub.cs" />
     <Compile Include="Hubs\UsersHub.cs" />
     <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Models\CategoryQuestion.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
+    <Compile Include="Models\Factories\ISponsorMessageModelFactory.cs" />
+    <Compile Include="Models\Factories\SponsorMessageModelFactory.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SponsorMessageModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserQuestionnaire.cs" />
     <Compile Include="OwinStartupClass.cs" />
@@ -158,8 +163,11 @@
     <Compile Include="Connections\TeamChatConnection\TeamChatConnection.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Services\Interfaces\IQuestionsService.cs" />
+    <Compile Include="Services\Interfaces\ISponsorMessageService.cs" />
     <Compile Include="Services\Interfaces\ITeamChatMessageService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\SponsorMessageService.cs" />
+    <Compile Include="Services\SponsorMessageTransformer.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\MockTeamChatMessageService.cs" />
     <Compile Include="TeamSauce.cs" />
@@ -469,6 +477,7 @@
     <Content Include="Scripts\jquery.signalR-2.0.0.js" />
     <Content Include="Scripts\jquery.signalR-2.0.0.min.js" />
     <Content Include="Scripts\LoginR.js" />
+    <Content Include="Scripts\SponsorChatR.js" />
     <Content Include="Scripts\teamsauce.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.min.js" />

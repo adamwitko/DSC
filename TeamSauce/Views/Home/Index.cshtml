@@ -13,24 +13,31 @@
         <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
     </head>
     <body>
-        <div class="row-fluid">
-            <div class="col-xs-12 col-sm-6 col-md-8">
+        <div id="loginOverlay" style="background-color: #006400;">
+            <h2>Login</h2>
+
+            <input type="text" id="username"/>
+            <input type="password" id="password"/>
+
+            <input type="button" id="log-in"/>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
                 @{ Html.RenderPartial("_Graphs"); }
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-4">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_HackInformation"); }
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_TeamChat"); }
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-4">
+            <div class="col-md-4">
                 @{ Html.RenderPartial("_Activity"); }
             </div>
+            <div class="col-md-4">
 
-          <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-4">
                 @{ Html.RenderPartial("_SponsorChat"); }
             </div>
         </div>
@@ -43,9 +50,63 @@
         <script src="@Url.Content("~/Scripts/angular.ratings.js")"></script>
         <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
         <script src='/signalr/js'></script>
-        
-        <script src="~/Scripts/ui-bootstrap-tpls-0.6.0.min.js"></script>
-        <script src="~/Scripts/jquery.raty.min.js"></script>
+        <script src="@Url.Content("~/Scripts/ui-bootstrap-tpls-0.6.0.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.raty.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/LoginR.js")"></script>
+        <script src="@Url.Content("~/Scripts/SponsorChatR.js")"></script>
         <script src="@Url.Content("~/Scripts/teamsauce.js")"></script>
+
+        <script type="text/javascript">
+            var proxy = $.connection.teamSauceHub;
+
+            var init_LoginR = function () {
+                $("#log-in").click(function () {
+                    var name = $('#username').val();
+                    var password = $('#password').val();
+                    proxy.server.logIn(name, password);
+                });
+            };
+
+            proxy.client.completed = function (connectionId) {
+                alert(connectionId);
+            };
+
+            proxy.client.loginFailed = function (connectionId) {
+                alert('Fail ' + connectionId);
+            };
+
+            var init_SponsorChatR = function () {
+
+                $("#send-sponsor-message").click(function () {
+                    var body = $('#sponsor-message').val();
+                    proxy.server.messageReceived(body);
+                });
+
+                proxy.server.getMessages().done(function (messages) {
+                    alert(messages);
+                });
+            };
+
+            proxy.client.userMessage = function (message) {
+                $('#sponsor-feed').append('<li>' +
+                    '<span class="name">' + message.Sender + '</span>' +
+                    '<span class="body">' + message.Message + '</span>' +
+                    '<time>' + message.Time + '</time>' +
+                    '</li>');
+            };
+
+            proxy.client.sponsorMessage = function (message) {
+                $('#sponsor-feed').append('<li>' +
+                    '<span class="name">' + message.Sender + '</span>' +
+                    '<span class="body">' + message.Message + '</span>' +
+                    '<time>' + message.Time + '</time>' +
+                    '</li>');
+            };
+
+            $.connection.hub.start().done(function() {
+                init_LoginR();
+                init_SponsorChatR();
+            });
+        </script>
     </body>
 </html>
