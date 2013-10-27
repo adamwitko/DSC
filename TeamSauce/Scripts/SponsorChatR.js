@@ -1,5 +1,5 @@
 ﻿$(function () {
-    var proxy = $.connection.sponsorChatHub;
+    var proxy = $.connection.teamSauceHub;
     
     var init = function () {
         

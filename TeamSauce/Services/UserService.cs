@@ -15,7 +15,7 @@ namespace TeamSauce.Services
     {
         private List<User> _currentUsers = new List<User>();
 
-        private IHubConnectionContext _clientContext = GlobalHost.ConnectionManager.GetHubContext<UsersHub>().Clients;
+        private IHubConnectionContext _clientContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
 
         public User GetUser(string connectionId)
         {

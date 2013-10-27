@@ -143,6 +143,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\SponsorChatHub.cs" />
+    <Compile Include="Hubs\TeamSauceHub.cs" />
     <Compile Include="Hubs\UsersHub.cs" />
     <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
     <Compile Include="Controllers\QueController.cs" />

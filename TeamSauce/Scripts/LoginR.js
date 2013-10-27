@@ -1,5 +1,5 @@
 ﻿$(function () {
-    var proxy = $.connection.usersHub;
+    var proxy = $.connection.teamSauceHub;
 
     var init = function() {
         $("#log-in").click(function() {

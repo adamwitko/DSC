@@ -33,7 +33,8 @@ namespace TeamSauce.DataAccess
                 var query = Query<UserDto>.EQ(user => user.Username, username);
                 
                 var collection = GetUserCollection();
-                return collection.FindAs<UserDto>(query).Any();
+                var result = collection.FindAs<UserDto>(query).Any();
+                return result;
             }
             catch (MongoConnectionException)
             {
