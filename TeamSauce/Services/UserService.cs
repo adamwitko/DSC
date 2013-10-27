@@ -15,7 +15,7 @@ namespace TeamSauce.Services
     {
         private List<User> _currentUsers = new List<User>();
 
-        private IHubConnectionContext _clientContext = GlobalHost.ConnectionManager.GetHubContext<UsersHub>().Clients;
+        private IHubConnectionContext _clientContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
 
         public User GetUser(string connectionId)
         {
@@ -31,7 +31,9 @@ namespace TeamSauce.Services
         {
             var service = new UserDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
 
-            if (!service.IsUserValid(username, password))
+            var foundUser = service.IsUserValid(username, password);
+            
+            if (foundUser == null)
             {
                 _clientContext.Client(connectionId).LoginFailed(connectionId);
                 return;
@@ -39,7 +41,7 @@ namespace TeamSauce.Services
 
             if (_currentUsers.All(user => user.ConnectionId != connectionId))
             {
-                _currentUsers.Add(new User { ConnectionId = connectionId, Name = username });
+                _currentUsers.Add(new User { ConnectionId = connectionId, Name = foundUser.Username, TeamId = foundUser.TeamId, UserType = foundUser.UserType});
             }
 
             _clientContext.Client(connectionId).Completed(connectionId);
