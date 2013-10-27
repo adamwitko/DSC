@@ -24,7 +24,7 @@ $(function () {
                 pointColor: "rgba(80,220,220,1)",
                 pointStrokeColor: "#fff"
             }];
-        
+
         var ctx = document.getElementById("that-big-graph").getContext("2d");
 
         var opts = {
@@ -47,7 +47,7 @@ $(function () {
 
         var labels = [];
         for (var i = 0; i < data.length; i++) {
-            labels[labels.length] = data[i].time;
+            labels[labels.length] = moment(data[i].time).fromNow();
         }
 
         // dict containing name of category with list of data points over time

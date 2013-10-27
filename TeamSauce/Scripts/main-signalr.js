@@ -72,14 +72,13 @@
             if (messages[idx].MessageType == 'Sponsor') {
                 $('#sponsor-feed').append('<li class="feed-sponsor">' +
                                 '<div><span class="name">' + messages[idx].Sender + '</span>' +
-                                '<time>' + messages[idx].Time + '</time></div>' +
+                                '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
                                 '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
                                 '</li>');
-
             } else {
                 $('#sponsor-feed').append('<li>' +
-                    '<div><span class="name">' + messages[idx].Sender + ' (' + messages[idx].TeamId + ')' + '</span>' +
-                    '<time>' + messages[idx].Time + '</time></div>' +
+                   '<div><span class="name">' + messages[idx].Sender + ' (' + messages[idx].TeamId + ')' + '</span>' +
+                    '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
                     '<div class="feed-body-div"><span class="body">' + messages[idx].Message + '</span></div>' +
                     '</li>');
             }
@@ -88,8 +87,8 @@
 
     proxy.client.userMessage = function (message) {
         $('#sponsor-feed').prepend('<li>' +
-            '<div><span class="name">' + message.Sender + ' (' + message.TeamId + ')' + '</span>' +
-            '<time>' + message.Time + '</time></div>' +
+           '<div><span class="name">' + message.Sender + ' (' + message.TeamId + ')' + '</span>' +
+            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
@@ -97,7 +96,7 @@
     proxy.client.sponsorMessage = function (message) {
         $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
             '<div><span class="name">' + message.Sender + '</span>' +
-            '<time>' + message.Time + '</time></div>' +
+            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
             '</li>');
     };
