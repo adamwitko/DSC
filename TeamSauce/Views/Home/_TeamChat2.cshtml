@@ -1,0 +1,14 @@
+﻿@model dynamic
+
+<h2>TEAM CHAT</h2>
+
+<div id="team-feed-holder" style="overflow:scroll;min-height: 250px; max-height: 250px; overflow-x: hidden">
+    <ul id="team-feed" class="chatbox"></ul>
+</div>
+<div class="chat-message-wrapper">
+     <textarea id="team-message" class="chat-message atwho"></textarea>
+</div>
+<input type="submit" id="send-team-message" value="Send" class="btn btn-info btn-block" />
+
+<script src="@Url.Content("~/Scripts/jquery.caret.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.atwho.js")"></script>

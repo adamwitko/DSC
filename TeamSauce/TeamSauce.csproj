@@ -151,9 +151,12 @@
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
     <Compile Include="Models\Factories\ISponsorMessageModelFactory.cs" />
+    <Compile Include="Models\Factories\ITeamMessageModelFactory.cs" />
     <Compile Include="Models\Factories\SponsorMessageModelFactory.cs" />
+    <Compile Include="Models\Factories\TeamMessageModelFactory.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SponsorMessageModel.cs" />
+    <Compile Include="Models\TeamMessageModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserQuestionnaire.cs" />
     <Compile Include="OwinStartupClass.cs" />
@@ -245,6 +248,7 @@
     <Content Include="Views\Cat\Index.cshtml" />
     <Content Include="Views\Home\_loginArea.cshtml" />
     <Content Include="Views\Home\Sponsor.cshtml" />
+    <Content Include="Views\Home\_TeamChat2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
