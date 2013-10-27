@@ -13,7 +13,7 @@ namespace TeamSauce.DataAccess
         private string _connectionString;
 
         private string _dbName = "TeamSauceMongoLab";
-        private string _collectionName = "user";
+        private string _collectionName = "SponsorMessage";
 
         public SponsorMessageDocumentStore()
         {
