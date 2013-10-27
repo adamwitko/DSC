@@ -21,15 +21,20 @@ namespace TeamSauce.Services
                         var categoryDictionary = new Dictionary<string, IList<int>>();
                         var date = q.date;
 
-                        foreach (var subel in q.questionnaireresponses.SelectMany(el => el.ratings))
+                        foreach (var el in q.questionnaireresponses)
                         {
-                            if (categoryDictionary.ContainsKey(subel.categorytype))
+                            foreach (var subel in el.ratings)
                             {
-                                categoryDictionary[subel.categorytype].Add(Int32.Parse(subel.value));
-                            }
-                            else
-                            {
-                                categoryDictionary[subel.categorytype] = new List<int>(Int32.Parse(subel.value));
+                                var responseValue = Int32.Parse(subel.value);
+
+                                if (categoryDictionary.ContainsKey(subel.categorytype))
+                                {
+                                    categoryDictionary[subel.categorytype].Add(responseValue);
+                                }
+                                else
+                                {
+                                    categoryDictionary[subel.categorytype] = new List<int> { responseValue};
+                                }
                             }
                         }
 
