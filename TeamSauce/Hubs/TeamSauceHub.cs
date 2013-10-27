@@ -3,6 +3,7 @@ using System.Configuration;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
+using TeamSauce.Connections.TeamChatConnection.Data;
 using TeamSauce.DataAccess;
 using TeamSauce.DataAccess.Model;
 using TeamSauce.Models.Factories;
@@ -19,25 +20,27 @@ namespace TeamSauce.Hubs
         private readonly ISponsorMessageModelFactory _sponsorMessageModelFactory;
         private readonly IQuestionnaireResultService _questionnaireResultService;
         private readonly ITeamMessageModelFactory _teamMessageModelFactory;
+        private readonly ITeamChatMessageService _teamChatMessageService;
 
         private readonly IHubConnectionContext _teamSauceHubContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
 
 
         public TeamSauceHub()
             : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory(), 
-            new QuestionnaireResultsService(), new TeamMessageModelFactory())
+            new QuestionnaireResultsService(), new TeamMessageModelFactory(), new TeamChatMessageService())
         {
         }
 
         public TeamSauceHub(IUserService userService, ISponsorMessageService sponsorMessageService, 
             ISponsorMessageModelFactory sponsorMessageModelFactory, IQuestionnaireResultService questionnaireResultService,
-            ITeamMessageModelFactory teamMessageModelFactory)
+            ITeamMessageModelFactory teamMessageModelFactory, ITeamChatMessageService teamChatMessageService)
         {
             _userService = userService;
             _sponsorMessageService = sponsorMessageService;
             _sponsorMessageModelFactory = sponsorMessageModelFactory;
             _questionnaireResultService = questionnaireResultService;
             _teamMessageModelFactory = teamMessageModelFactory;
+            _teamChatMessageService = teamChatMessageService;
         }
 
         public void LogIn(string username, string password)
@@ -107,7 +110,16 @@ namespace TeamSauce.Hubs
             var sender = _userService.GetUser(Context.ConnectionId);
             var model = _teamMessageModelFactory.Create(message, sender.Name);
 
-            _teamSauceHubContext.All.TeamMessage(model);
+            var teamChatMessage = new TeamChatMessage(model.Sender, model.Message);
+            _teamChatMessageService.AddMessage(teamChatMessage);
+
+            _teamSauceHubContext.All.TeamMessages(new List<TeamChatMessage> { teamChatMessage });
+        }
+
+        public void GetTeamMessages()
+        {
+            var teamMessages = _teamChatMessageService.GetTeamMessages(Context.ConnectionId);
+            _teamSauceHubContext.Client(Context.ConnectionId).TeamMessages(teamMessages);
         }
     }
 }

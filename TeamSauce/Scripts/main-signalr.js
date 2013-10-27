@@ -157,15 +157,17 @@
             }
         });
 
-        proxy.server.getMessages();
+        proxy.server.getTeamMessages();
     };
 
-    proxy.client.teamMessage = function (message) {
-        $('#team-feed').append('<li>' +
-           '<div><span class="name">' + message.Sender + '</span>' +
-            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
-            '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
-            '</li>');
+    proxy.client.teamMessages = function (messages) {
+        for (var idx = 0; idx < messages.length; idx++) {
+            $('#team-feed').append('<li>' +
+                '<div><span class="name">' + messages[idx].Name + '</span>' +
+                '<time>' + moment(messages[idx].Time).fromNow() + '</time></div>' +
+                '<div class="feed-body-div"><span class="body">' + messages[idx].Body + '</span></div>' +
+                '</li>');
+        }
         
         $('#team-feed-holder').scrollTop($('#team-feed-holder')[0].scrollHeight);
     };

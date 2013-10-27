@@ -9,7 +9,7 @@ namespace TeamSauce
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR<TeamChatConnection>("/teamchat");
+            // app.MapSignalR<TeamChatConnection>("/teamchat");
             app.MapSignalR();
         }
     }

@@ -171,8 +171,9 @@
     <Compile Include="Services\QuestionnaireResultsService.cs" />
     <Compile Include="Services\SponsorMessageService.cs" />
     <Compile Include="Services\SponsorMessageTransformer.cs" />
+    <Compile Include="Services\TeamChatMessageService.cs" />
+    <Compile Include="Services\TeamChatModelTransformer.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Services\MockTeamChatMessageService.cs" />
     <Compile Include="TeamSauce.cs" />
   </ItemGroup>
   <ItemGroup>
