@@ -16,7 +16,7 @@ $(function () {
 
         var names = [];
         for (var name in greatData) {
-            names += [name];
+            names[names.length] += name;
         }
 
         var datasets = [];
