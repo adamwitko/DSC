@@ -47,6 +47,12 @@ $(function () {
             colourset.data = result[name];
 
             datasets[datasets.length] = colourset;
+
+            $('.graph-key').append('<li style="background-color:' +
+                                   colourset.fillColor + '">' +
+                                   '<span>' + name + '</span>' +
+                                   '</li>');
+
         }
 
         var data = {
