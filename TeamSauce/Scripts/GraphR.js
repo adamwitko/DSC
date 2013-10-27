@@ -1,8 +1,8 @@
 $(function () {
     $.getJSON('/que/allaverage', function(data) {
-        var names = [];
-        for (var name in data[0].categories) {
-            names[names.length] = name;
+        var labels = [];
+        for (var i = 0; i < data.length; i++) {
+            labels[labels.length] = data[i].time;
         }
 
         // dict containing name of category with list of data points over time
@@ -26,7 +26,7 @@ $(function () {
         }
 
         var data = {
-            labels : names,
+            labels : labels,
             datasets : datasets
         }
 
