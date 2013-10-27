@@ -1,19 +1,16 @@
 $(function () {
-    var conn = $.connection("/qs");
 
-    conn.received(function (data) {
+    $.getJSON('/que/allaverage', function(data) {
         var greatData = {};
 
-        for (var i = 0; i < data.Qs.length; i++) {
-            var q = data.Qs[i];
+        for (var i = 0; i < data.length; i++) {
+            var q = data[i], time = q.time, cats = q.categories;
 
-            for (var j = 0; j < q.Categories.length; j++) {
-                var c = q.Categories[j];
-
-                if (greatData[c.Name]) {
-                    greatData[c.Name] += [c.Value];
+            for (var name in cats) {
+                if (greatData[name]) {
+                    greatData[name] += [cats[name]];
                 } else {
-                    greatData[c.Name] = [c.Value];
+                    greatData[name] = [cats[name]];
                 }
             }
         }
@@ -30,7 +27,7 @@ $(function () {
                 strokeColor : "rgba(220,220,220,1)",
                 pointColor : "rgba(220,220,220,1)",
                 pointStrokeColor : "#fff",
-                data : greatData[name];
+                data : greatData[name]
             }];
         }
 
@@ -43,14 +40,4 @@ $(function () {
 
         new Chart(ctx).Line(data);
     });
-
-    conn.error(function (error) {
-        console.warn(error);
-    });
-
-    conn.start()
-        .promise()
-        .done(function () {
-            // on start up
-        });
 });
