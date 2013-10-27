@@ -144,6 +144,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\SponsorChatHub.cs" />
+    <Compile Include="Hubs\TeamChatHub.cs" />
     <Compile Include="Hubs\TeamSauceHub.cs" />
     <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Models\CategoryQuestion.cs" />
@@ -151,9 +152,12 @@
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatPost.cs" />
     <Compile Include="Connections\TeamChatConnection\Data\TeamChatMessage.cs" />
     <Compile Include="Models\Factories\ISponsorMessageModelFactory.cs" />
+    <Compile Include="Models\Factories\ITeamMessageModelFactory.cs" />
     <Compile Include="Models\Factories\SponsorMessageModelFactory.cs" />
+    <Compile Include="Models\Factories\TeamMessageModelFactory.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SponsorMessageModel.cs" />
+    <Compile Include="Models\TeamMessageModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserQuestionnaire.cs" />
     <Compile Include="OwinStartupClass.cs" />
