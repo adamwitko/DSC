@@ -25,12 +25,12 @@
             });
         });
 
-     $('#sponsor-feed').next().find('.atwho').atwho({
+     $('#sponsor-message').atwho({
          at: "@",
          data: ["ao"],
      });
 
-     $('#team-chatbox').next().find('.atwho').atwho({
+     $('#team-message').atwho({
          at: "@",
          data: ["Josh", "Adam", "Olly", "James"],
      });
