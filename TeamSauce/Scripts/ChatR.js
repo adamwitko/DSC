@@ -4,7 +4,7 @@
     myConnection.received(function (data) {
         for (var i = 0; i < data.length; i++) {
             var message = data[i];
-            $('team-chatbox').append('<li>' +
+            $('#team-chatbox').append('<li>' +
                                  '<span class="name">' + message.Name + '</span>' +
                                  '<span class="body">' + message.Body + '</span>' +
                                  '<time>' + moment(message.Time).fromNow() + '</time>' +
@@ -25,7 +25,12 @@
             });
         });
 
-     $('.atwho').atwho({
+     $('#sponsor-message.atwho').atwho({
+         at: "@",
+         data: ["ao"],
+     });
+
+     $('#team-message.atwho').atwho({
          at: "@",
          data: ["Josh", "Adam", "Olly", "James"],
      });
