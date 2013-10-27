@@ -13,32 +13,34 @@
         <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
     </head>
     <body>
-        <div id="loginOverlay" style="background-color: #006400;">
-            <h2>Login</h2>
+        <div class="container">
+            <div id="loginOverlay" style="background-color: #006400;">
+                <h2>Login</h2>
 
-            <input type="text" id="username"/>
-            <input type="password" id="password"/>
+                <input type="text" id="username"/>
+                <input type="password" id="password"/>
 
-            <input type="button" id="log-in"/>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                @{ Html.RenderPartial("_Graphs"); }
+                <input type="button" id="log-in"/>
             </div>
-            <div class="col-md-4">
-                @{ Html.RenderPartial("_HackInformation"); }
+            <div class="row">
+                <div class="col-md-8">
+                    @{ Html.RenderPartial("_Graphs"); }
+                </div>
+                <div class="col-md-4">
+                    @{ Html.RenderPartial("_HackInformation"); }
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                @{ Html.RenderPartial("_TeamChat"); }
-            </div>
-            <div class="col-md-4">
-                @{ Html.RenderPartial("_Activity"); }
-            </div>
-            <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-4">
+                    @{ Html.RenderPartial("_TeamChat"); }
+                </div>
+                <div class="col-md-4">
+                    @{ Html.RenderPartial("_Activity"); }
+                </div>
+                <div class="col-md-4">
 
-                @{ Html.RenderPartial("_SponsorChat"); }
+                    @{ Html.RenderPartial("_SponsorChat"); }
+                </div>
             </div>
         </div>
         
@@ -56,6 +58,8 @@
         <script src="@Url.Content("~/Scripts/LoginR.js")"></script>
         <script src="@Url.Content("~/Scripts/SponsorChatR.js")"></script>
         <script src="@Url.Content("~/Scripts/teamsauce.js")"></script>
+        
+        <script src="@Url.Content("~/Scripts/moment.js")"></script>
 
         <script type="text/javascript">
             var proxy = $.connection.teamSauceHub;
@@ -92,16 +96,16 @@
                 for (var idx = 0; idx < messages.length; idx++) {
                     if (messages[idx].MessageType == 'Sponsor') {
                         $('#sponsor-feed').append('<li>' +
-                                         '<span class="name">' + messages[idx].Sender + '</span>' +
-                                         '<span class="body">' + messages[idx].Message + '</span>' +
-                                         '<time>' + messages[idx].Time + '</time>' +
-                                         '</li>');
+                            '<span class="name">' + messages[idx].Sender + '</span>' +
+                            '<span class="body">' + messages[idx].Message + '</span>' +
+                            '<time>' + messages[idx].Time + '</time>' +
+                            '</li>');
                     } else {
                         $('#sponsor-feed').append('<li>' +
-                                        '<span class="name">' + messages[idx].Sender + '</span>' +
-                                        '<span class="body">' + messages[idx].Message + '</span>' +
-                                        '<time>' + messages[idx].Time + '</time>' +
-                                        '</li>');
+                            '<span class="name">' + messages[idx].Sender + '</span>' +
+                            '<span class="body">' + messages[idx].Message + '</span>' +
+                            '<time>' + messages[idx].Time + '</time>' +
+                            '</li>');
                     }
                 }
             };
