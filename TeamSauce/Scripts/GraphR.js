@@ -1,33 +1,29 @@
 $(function () {
-    var proxy = $.connection.graphHub;
-
-    proxy.client.getData = function (data) {
-        var somecoloursets = [
-                {
-                    fillColor: "rgba(220,220,220,0.5)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff"
-                },
-                {
-                    fillColor: "rgba(220,80,220,0.5)",
-                    strokeColor: "rgba(220,80,220,1)",
-                    pointColor: "rgba(220,80,220,1)",
-                    pointStrokeColor: "#fff"
-                },
-                {
-                    fillColor: "rgba(220,220,80,0.5)",
-                    strokeColor: "rgba(220,220,80,1)",
-                    pointColor: "rgba(220,220,80,1)",
-                    pointStrokeColor: "#fff"
-                },
-                {
-                    fillColor: "rgba(80,220,220,0.5)",
-                    strokeColor: "rgba(80,220,220,1)",
-                    pointColor: "rgba(80,220,220,1)",
-                    pointStrokeColor: "#fff"
-                }
-        ];
+    var updateGraph = function (data) {
+        var somecoloursets = [{
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff"
+            },
+            {
+                fillColor: "rgba(220,80,220,0.5)",
+                strokeColor: "rgba(220,80,220,1)",
+                pointColor: "rgba(220,80,220,1)",
+                pointStrokeColor: "#fff"
+            },
+            {
+                fillColor: "rgba(220,220,80,0.5)",
+                strokeColor: "rgba(220,220,80,1)",
+                pointColor: "rgba(220,220,80,1)",
+                pointStrokeColor: "#fff"
+            },
+            {
+                fillColor: "rgba(80,220,220,0.5)",
+                strokeColor: "rgba(80,220,220,1)",
+                pointColor: "rgba(80,220,220,1)",
+                pointStrokeColor: "#fff"
+            }];
         
         var ctx = document.getElementById("that-big-graph").getContext("2d");
 
@@ -62,7 +58,10 @@ $(function () {
                 result[category][i] = data[i].categories[category];
             }
         }
-
+        
+        var graphKeysList = $('.graph-key ul');
+        graphKeysList.empty();
+        
         var datasets = [];
         for (var name in result) {
             var colourset = somecoloursets.pop();
@@ -70,7 +69,7 @@ $(function () {
 
             datasets[datasets.length] = colourset;
 
-            $('.graph-key ul').append('<li style="background-color:' +
+            graphKeysList.append('<li style="background-color:' +
                 colourset.fillColor + '">' +
                 '<span>' + name + '</span>' +
                 '</li>');
@@ -78,6 +77,12 @@ $(function () {
 
         new Chart(ctx).Line({ labels: labels, datasets: datasets }, opts);
     };
+    
+    var proxy = $.connection.teamSauceHub;
+    
+    proxy.client.getData = updateGraph;
 
-    $.connection.hub.start();
+    $.connection.hub.start().done(function () {
+        proxy.server.getData();
+    });
 });
