@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Newtonsoft.Json;
+using TeamSauce.DataAccess;
+using TeamSauce.DataAccess.Model;
 using TeamSauce.Models.Factories;
 using TeamSauce.Services;
 using TeamSauce.Services.Interfaces;
@@ -58,6 +63,21 @@ namespace TeamSauce.Hubs
         {
             var messages = _sponsorMessageService.GetMessages();
             _clientContext.Client(Context.ConnectionId).MessagesLoaded(messages);
+        }
+
+        public void Complete(string questionnaireId, string data)
+        {
+            var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
+
+            var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var questionnaire = documentStore.FindQuestionnaire(questionnaireId);
+
+            if (questionnaire.questionnaireresponses == null)
+                questionnaire.questionnaireresponses = new List<QuestionnaireResponse> { questionnaireResponse };
+            else
+                questionnaire.questionnaireresponses.Add(questionnaireResponse);
+
+            documentStore.UpsertQuestionnaire(questionnaire);
         }
     }
 }

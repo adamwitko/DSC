@@ -1,26 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.SignalR;
+using TeamSauce.DataAccess;
+using TeamSauce.DataAccess.Model;
+using TeamSauce.Hubs;
 using TeamSauce.Models;
 
 namespace TeamSauce.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
+        private readonly IHubContext _context;
+
+        public HomeController()
+        {
+            _context = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>();
+        }
+
+        public HomeController(IHubContext context)
+        {
+            _context = context;
+        }
 
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Chat()
-        {
-            var model = new ChatData();
-            return View(model);
         }
 
         public ActionResult LogIn()
@@ -28,91 +34,26 @@ namespace TeamSauce.Controllers
             return View();
         }
 
-
-        //
-        // GET: /Home/Details/5
-
-        public ActionResult Details(int id)
+        public void Admin()
         {
-            return View();
-        }
+            var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var questionnaire = new Questionnaire { date = DateTime.UtcNow };
+            documentStore.UpsertQuestionnaire(questionnaire);
 
-        //
-        // GET: /Home/Create
+            var categoryDocumentStore = new CategoryDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var categories = categoryDocumentStore.GetAllCategories();
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+            var questionnaireForUser = new UserQuestionnaire
+                {
+                    id = questionnaire.Id,
+                    categoryQuestions = categories.Select(c => new CategoryQuestion
+                        {
+                            category = c.categorytype,
+                            text = c.categoryquestions[new Random().Next(0, c.categoryquestions.Count() - 1)].text
+                        }).ToList()
+                };
 
-        //
-        // POST: /Home/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Home/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Home/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Home/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Home/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _context.Clients.All.sentOutQuestionnaire(questionnaireForUser);
         }
     }
 }
