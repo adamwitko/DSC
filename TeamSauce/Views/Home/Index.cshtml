@@ -70,6 +70,7 @@
             proxy.client.completed = function (connectionId) {
                 alert(connectionId);
                 init_SponsorChatR();
+                init_QuestionnaireR();
             };
 
             proxy.client.loginFailed = function (connectionId) {
@@ -105,7 +106,6 @@
                 }
             };
 
-
             proxy.client.userMessage = function (message) {
                 $('#sponsor-feed').append('<li>' +
                     '<span class="name">' + message.Sender + '</span>' +
@@ -122,6 +122,44 @@
                     '</li>');
             };
 
+            var answers = [];
+            var questionnaireId;
+            
+            var init_QuestionnaireR = function() {
+                $('#submitQuestionnaire').click(function () {
+                    var questionnaireResponse = {
+                        ratings: answers
+                    };
+
+                    proxy.server.complete(questionnaireId, JSON.stringify(questionnaireResponse));
+        
+                    answers = [];
+                    questionnaireId = undefined;
+                    $('#mymodal').modal('hide');
+                });
+            };
+            
+            proxy.client.sentOutQuestionnaire = function (questionnaire) {
+                questionnaireId = questionnaire.id;
+                
+                $.each(questionnaire.categoryQuestions, function(index, value) {
+                    $('#questions').append('<div class="question" ng-repeat="question in questions">' +
+                        '<span class="glyphicon glyphicon-record"></span><span>' + value.text + 
+                        '</span><div class="star" data-category=' + value.category + '"/></div>');
+                });
+
+                $('#mymodal').modal('show');
+                
+                $('.star').raty({
+                    'click': function (score) {
+                        answers.push({
+                            category: $(this).attr('data-category'),
+                            value: score
+                        });
+                    }
+                });
+            };
+            
             $.connection.hub.start().done(function() {
                 init_LoginR();
             });

@@ -1,21 +1,15 @@
 ﻿@model dynamic
 
-<div ng-controller="questionnaireCtrl" class="modal fade" role="dialog" id="mymodal">
-    <div class="modal-dialog" >
+<div class="modal fade" role="dialog" id="mymodal">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Question time!</h4>
             </div>
-            <div class="modal-body">
-                <div class="question" ng-repeat="question in questions">
-                    <span class="glyphicon glyphicon-record"></span>
-                    <span>{{question.text}}</span>
-                    <div class="star" data-category="{{question.category}}"/>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="go()">Go!</button>
-            </div>
+            <div id="questions" class="modal-body" />
+        </div>
+        <div class="modal-footer">
+            <button id="submitQuestionnaire" type="button" class="btn btn-primary" data-dismiss="modal">Go!</button>
         </div>
     </div>
-</div>  
+</div>

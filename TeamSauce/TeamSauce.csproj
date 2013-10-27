@@ -137,7 +137,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hubs\Questionnaire\QuestionnaireHub.cs" />
     <Compile Include="Controllers\QueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />

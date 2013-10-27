@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using TeamSauce.DataAccess;
 using TeamSauce.DataAccess.Model;
-using TeamSauce.Hubs.Questionnaire;
+using TeamSauce.Hubs;
 using TeamSauce.Models;
 
 namespace TeamSauce.Controllers
@@ -16,7 +16,7 @@ namespace TeamSauce.Controllers
 
         public HomeController()
         {
-            _context = GlobalHost.ConnectionManager.GetHubContext<QuestionnaireHub>();
+            _context = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>();
         }
 
         public HomeController(IHubContext context)
