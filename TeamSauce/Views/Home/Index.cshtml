@@ -10,10 +10,11 @@
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <link href="@Url.Content("/Content/bootstrap.min.css")" rel="stylesheet" />
-        <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
         <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
         <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
         <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.0.js")"></script>
+        <link href="@Url.Content("/Content/site.css")" rel="stylesheet" />
+
     </head>
     <body>
         @{ Html.RenderPartial("_loginArea");}
@@ -67,6 +68,15 @@
         <script src="@Url.Content("~/Scripts/LoginR.js")"></script>
         <script src="@Url.Content("~/Scripts/moment.js")"></script>
         <script src="@Url.Content("~/Scripts/main-signalr.js")"></script>
+        <script src="~/Scripts/jquery.atwho.js"></script>
+        <script src="~/Scripts/jquery.caret.js"></script>
+
+        <script type="text/javascript">
+            $('.atwho').atwho({
+                at: "@Html.Raw("@")",
+                    data: ["Josh", "Adam", "Olly", "James"],
+                });
+        </script>
 
     </body>
 </html>

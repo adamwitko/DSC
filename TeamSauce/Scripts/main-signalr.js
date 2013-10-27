@@ -75,7 +75,7 @@
     };
 
     proxy.client.userMessage = function (message) {
-        $('#sponsor-feed').append('<li>' +
+        $('#sponsor-feed').prepend('<li>' +
             '<div><span class="name">' + message.Sender + '</span>' +
             '<time>' + message.Time + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
@@ -83,7 +83,7 @@
     };
 
     proxy.client.sponsorMessage = function (message) {
-        $('#sponsor-feed').append('<li class="feed-sponsor">' +
+        $('#sponsor-feed').prepend('<li class="feed-sponsor">' +
             '<div><span class="name">' + message.Sender + '</span>' +
             '<time>' + message.Time + '</time></div>' +
             '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
@@ -94,7 +94,7 @@
         questionnaireId = questionnaire.id;
 
         $.each(questionnaire.categoryQuestions, function (index, value) {
-            $('#questions').append('<div class="question">' +
+            $('#questions').prepend('<div class="question">' +
                 '<span class="glyphicon glyphicon-record"></span><span>' + value.text +
                 '</span><div class="star" data-category=' + value.category + '/></div>');
         });
