@@ -6,6 +6,27 @@
 .angular-ratings li.over { border-width: 0px; background-position: 0 -20px; cursor: pointer; }
 .angular-ratings li.active { border-width: 0px; background-position: 0 -20px; }
 
+
+/* Chart */
+.graph-key {
+    width: 50px;
+}
+
+.graph-key h3 {
+    font-size: 21px;
+}
+
+.graph-key ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.graph-key ul li {
+    padding: 3px;
+    border-radius: 2px;
+}
+
 /* Chatbox */
 .chatbox {
     border-top-left-radius: 5px;
