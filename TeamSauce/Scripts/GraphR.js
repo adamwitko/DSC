@@ -27,7 +27,7 @@ $(function () {
                 strokeColor : "rgba(220,220,220,1)",
                 pointColor : "rgba(220,220,220,1)",
                 pointStrokeColor : "#fff",
-                data : greatData[name];
+                data : greatData[name]
             }];
         }
 
