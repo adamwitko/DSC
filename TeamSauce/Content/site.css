@@ -15,7 +15,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 450px;
+
 }
 
 .chatbox li {
@@ -51,7 +51,7 @@
     border-bottom-left-radius: 5px;
     padding: 0;
     margin: 0;
-    width: 450px;
+    
     border: 1px solid rgba(0,0,0,.4);
     border-top: none;
     background: rgba(0,0,0,.01);
@@ -62,10 +62,9 @@
     color: rgba(0,0,0,.8);
     outline: none;
     resize: none;
-    height: 30px;
-    max-width: 430px;
-    min-width: 430px;
-    width: 430px;
+    height: 60px;
+    overflow: auto;
+    width: 100%;
     padding: 10px;
     background: none;
     border: none;
