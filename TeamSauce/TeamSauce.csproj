@@ -466,6 +466,7 @@
     <Content Include="Scripts\jquery.signalR-2.0.0.js" />
     <Content Include="Scripts\jquery.signalR-2.0.0.min.js" />
     <Content Include="Scripts\LoginR.js" />
+    <Content Include="Scripts\SponsorChatR.js" />
     <Content Include="Scripts\teamsauce.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.js" />
     <Content Include="Scripts\ui-bootstrap-0.6.0.min.js" />

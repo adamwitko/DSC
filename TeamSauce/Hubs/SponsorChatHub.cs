@@ -8,7 +8,7 @@ using TeamSauce.Services.Interfaces;
 
 namespace TeamSauce.Hubs
 {
-    [HubName("sponsorHub")]
+    [HubName("sponsorChatHub")]
     public class SponsorChatHub : Hub
     {
         private readonly IUserService _userService;
