@@ -59,7 +59,6 @@
             
             var signIn = $('#signin');
             signIn.text("Sign in");
-            signIn.prop("disabled", !signIn.prop("disabled"));
             $('#username').val("");
             $('#password').val("");
             
