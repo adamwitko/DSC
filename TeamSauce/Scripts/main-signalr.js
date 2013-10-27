@@ -61,6 +61,7 @@
         
         initSponsorChatR();
         initQuestionnaireR();
+        initTeamChatR();
     };
 
     proxy.client.loginFailed = function (connectionId) {
@@ -127,6 +128,36 @@
                 });
             }
         });
+    };
+
+    var initTeamChatR = function () {
+        $("#send-team-message").click(function () {
+            if (sponsorChatEnabled) {
+                var body = $('#team-message').val();
+                $('#team-message').val('');
+                $('#send-team-message').val('Sending...');
+                $('#send-team-message').addClass('btn-disabled');
+
+                sponsorChatEnabled = false;
+                proxy.server.teamMessageReceived(body).done(function () {
+                    $('#send-team-message').val('Send');
+                    $('#send-team-message').removeClass('btn-disabled');
+                    sponsorChatEnabled = true;
+                });
+            }
+        });
+
+        proxy.server.getMessages();
+    };
+
+    proxy.client.teamMessage = function (message) {
+        $('#team-feed').append('<li>' +
+           '<div><span class="name">' + message.Sender + '</span>' +
+            '<time>' + moment(message.Time).fromNow() + '</time></div>' +
+            '<div class="feed-body-div"><span class="body">' + message.Message + '</span></div>' +
+            '</li>');
+        
+        $('#team-feed-holder').scrollTop($('#team-feed-holder')[0].scrollHeight);
     };
 
     $.connection.hub.start().done(function () {

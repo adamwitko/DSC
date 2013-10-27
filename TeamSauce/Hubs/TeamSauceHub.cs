@@ -16,25 +16,28 @@ namespace TeamSauce.Hubs
     {
         private readonly IUserService _userService;
         private readonly ISponsorMessageService _sponsorMessageService;
-        private readonly ISponsorMessageModelFactory _modelFactory;
+        private readonly ISponsorMessageModelFactory _sponsorMessageModelFactory;
         private readonly IQuestionnaireResultService _questionnaireResultService;
+        private readonly ITeamMessageModelFactory _teamMessageModelFactory;
 
         private readonly IHubConnectionContext _teamSauceHubContext = GlobalHost.ConnectionManager.GetHubContext<TeamSauceHub>().Clients;
 
 
         public TeamSauceHub()
-            : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory(), new QuestionnaireResultsService())
+            : this(ServiceFactory.GetUserService(), new SponsorMessageService(), new SponsorMessageModelFactory(), 
+            new QuestionnaireResultsService(), new TeamMessageModelFactory())
         {
         }
 
         public TeamSauceHub(IUserService userService, ISponsorMessageService sponsorMessageService, 
-            ISponsorMessageModelFactory modelFactory, IQuestionnaireResultService questionnaireResultService)
+            ISponsorMessageModelFactory sponsorMessageModelFactory, IQuestionnaireResultService questionnaireResultService,
+            ITeamMessageModelFactory teamMessageModelFactory)
         {
             _userService = userService;
             _sponsorMessageService = sponsorMessageService;
-            _modelFactory = modelFactory;
+            _sponsorMessageModelFactory = sponsorMessageModelFactory;
             _questionnaireResultService = questionnaireResultService;
-
+            _teamMessageModelFactory = teamMessageModelFactory;
         }
 
         public void LogIn(string username, string password)
@@ -50,7 +53,7 @@ namespace TeamSauce.Hubs
         {
             var sender = _userService.GetUser(Context.ConnectionId);
 
-            var sponsorMessageModel = _modelFactory.Create(message, sender);
+            var sponsorMessageModel = _sponsorMessageModelFactory.Create(message, sender);
 
             _sponsorMessageService.PersistMessage(sponsorMessageModel);
 
@@ -97,6 +100,14 @@ namespace TeamSauce.Hubs
             var calculatedQuestionnaireResultAverages = _questionnaireResultService.GetData();
 
             _teamSauceHubContext.All.GetData(calculatedQuestionnaireResultAverages);
+        }
+
+        public void TeamMessageReceived(string message)
+        {
+            var sender = _userService.GetUser(Context.ConnectionId);
+            var model = _teamMessageModelFactory.Create(message, sender.Name);
+
+            _teamSauceHubContext.All.TeamMessage(model);
         }
     }
 }
