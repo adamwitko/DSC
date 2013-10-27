@@ -17,17 +17,15 @@ namespace TeamSauce.Hubs.Questionnaire
         {
             var questionnaireResponse = JsonConvert.DeserializeObject<QuestionnaireResponse>(data);
 
-            using(var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]))
-            {
-                var questionnaire = documentStore.FindQuestionnaire(questionnaireId);
+            var documentStore = new QuestionnaireDocumentStore(ConfigurationManager.AppSettings["MONGOLAB_PROD"]);
+            var questionnaire = documentStore.FindQuestionnaire(questionnaireId);
 
-                if (questionnaire.questionnaireresponses == null)
-                    questionnaire.questionnaireresponses = new List<QuestionnaireResponse> { questionnaireResponse };
-                else
-                    questionnaire.questionnaireresponses.Add(questionnaireResponse);
+            if (questionnaire.questionnaireresponses == null)
+                questionnaire.questionnaireresponses = new List<QuestionnaireResponse> { questionnaireResponse };
+            else
+                questionnaire.questionnaireresponses.Add(questionnaireResponse);
 
-                documentStore.UpsertQuestionnaire(questionnaire);                
-            }
+            documentStore.UpsertQuestionnaire(questionnaire);
         }
     }
 }

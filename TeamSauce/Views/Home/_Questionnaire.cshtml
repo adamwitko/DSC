@@ -4,14 +4,13 @@
     <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Question time!
-                </h4>
+                <h4 class="modal-title">Question time!</h4>
             </div>
             <div class="modal-body">
                 <div class="question" ng-repeat="question in questions">
                     <span class="glyphicon glyphicon-record"></span>
                     <span>{{question.text}}</span>
-                    <angular-ratings ng-model="user_rating" notify-url="notify.json" notify-id="id" category=""/>
+                    <div class="star" data-category="{{question.category}}"/>
                 </div>
             </div>
             <div class="modal-footer">

@@ -16,7 +16,7 @@ app.directive("angularRatings", function () {
             $scope.over = 1;
             $scope.setRating = function (category, rating) {
                 $scope.model = rating;
-                this.$emit('ratingUpdate', { "categoryType": "Hunger", "value": rating });
+                this.$emit('ratingUpdate', { "categoryType": category, "value": rating });
                 $scope.$apply();
             };
             return $scope.setOver = function (n) {

@@ -19,10 +19,18 @@ app.controller('questionnaireCtrl', ['$scope', '$rootScope', function ($scope, $
     proxy.client.sentOutQuestionnaire = function (questionnaire) {
         $scope.questionnaire = questionnaire;
         $scope.questions = $scope.questionnaire.categoryQuestions;
-
         $('#mymodal').modal('show');
-        
         $scope.$apply();
+
+        $('.star').raty({
+            'click': function (score) {
+
+                answers.push({
+                    category: $(this).attr('data-category'),
+                    value: score
+                });
+            }
+        });
     };
     
     $scope.go = function() {
@@ -35,4 +43,6 @@ app.controller('questionnaireCtrl', ['$scope', '$rootScope', function ($scope, $
         answers = [];
         $('#mymodal').modal('hide');
     };
+    
+
 }]);
