@@ -28,11 +28,11 @@ namespace TeamSauce.Controllers
 
             var listOfQs = mongoStore.GetAllQuestionnaires();
 
-            var some = listOfQs.Select(q =>
+            var some = listOfQs.Where(x => x.questionnaireresponses != null).Select(q =>
                                            {
                                                var catDic = new Dictionary<string, IList<int>>();
                                                var date = q.date;
-                                            
+
                                                foreach (var el in q.questionnaireresponses)
                                                {
                                                    foreach (var subel in el.ratings)
