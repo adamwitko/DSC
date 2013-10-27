@@ -99,6 +99,14 @@
     color: black;
 }
 
+.feed-sponsor {
+    background-color: rgba(255, 128, 0, 0.2);
+}
+
+.feed-body-div {
+    margin-top: 20px;
+}
+
 .center-align {
     text-align: center;
 }

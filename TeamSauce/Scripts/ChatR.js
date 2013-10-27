@@ -4,7 +4,7 @@
     myConnection.received(function (data) {
         for (var i = 0; i < data.length; i++) {
             var message = data[i];
-            $('.chatbox').append('<li>' +
+            $('team-chatbox').append('<li>' +
                                  '<span class="name">' + message.Name + '</span>' +
                                  '<span class="body">' + message.Body + '</span>' +
                                  '<time>' + message.Time + '</time>' +
@@ -24,4 +24,9 @@
                 myConnection.send(JSON.stringify({ Name: "Josh", Body: body }));
             });
         });
+
+     $('.atwho').atwho({
+         at: "@",
+         data: ["Josh", "Adam", "Olly", "James"],
+     });
 });
