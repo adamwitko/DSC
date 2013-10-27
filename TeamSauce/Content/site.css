@@ -1,5 +1,7 @@
 ﻿body {
-    background-color: #F5F4ED;
+    
+    background-image: -webkit-radial-gradient(50% 50%, circle, rgba(100%,100%,50%, 0.4) 20%, rgba(90%,60%,60%,0.4) 80%);
+
 }
 
 .angular-ratings { overflow: hidden; *zoom: 1; list-style: none; padding: 0; margin: 0; }
@@ -95,6 +97,14 @@
     box-shadow: none;
     border: none;
     color: black;
+}
+
+.feed-sponsor {
+    background-color: rgba(255, 128, 0, 0.2);
+}
+
+.feed-body-div {
+    margin-top: 20px;
 }
 
 .center-align {
