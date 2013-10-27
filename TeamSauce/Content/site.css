@@ -1,6 +1,31 @@
 ﻿body {
 }
 
+.angular-ratings { overflow: hidden; *zoom: 1; list-style: none; padding: 0; margin: 0; }
+.angular-ratings li { float: left; width: 20px; height: 20px; border-width: 0px; margin: 1px; text-indent: -500000em; background: #cccccc url(angular-rating.png) no-repeat; background-size: 100%; }
+.angular-ratings li.over { border-width: 0px; background-position: 0 -20px; cursor: pointer; }
+.angular-ratings li.active { border-width: 0px; background-position: 0 -20px; }
+
+
+/* Chart */
+.graph-key {
+    width: 100px;
+}
+
+.graph-key h3 {
+    font-size: 21px;
+}
+
+.graph-key ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.graph-key ul li {
+    padding: 3px;
+    border-radius: 2px;
+}
 
 /* Chatbox */
 .chatbox {
@@ -11,7 +36,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-
 }
 
 .chatbox li {
@@ -38,7 +62,8 @@
 .chatbox time {
     float: right;
     font-size: 11px;
-    margin-top: 3px;
+    position: relative;
+    top: -16px;
     color: rgba(0,0,0,.6);
 }
 
@@ -47,7 +72,6 @@
     border-bottom-left-radius: 5px;
     padding: 0;
     margin: 0;
-    
     border: 1px solid rgba(0,0,0,.4);
     border-top: none;
     background: rgba(0,0,0,.01);
@@ -59,38 +83,16 @@
     outline: none;
     resize: none;
     height: 60px;
-    overflow: auto;
-    width: 100%;
+    min-width: 100%;
     padding: 10px;
     background: none;
     border: none;
+
 }
 
-.chat-message:focus
-{
+.chat-message:focus {
     outline: none;
     box-shadow: none;
     border: none;
     color: black;
 }
-
-.graph-key {
-    width: 50px;
-}
-
-.graph-key h3 {
-    font-size: 21px;
-}
-
-.graph-key ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.graph-key ul li {
-    padding: 3px;
-    border-radius: 2px;
-}
-
-
