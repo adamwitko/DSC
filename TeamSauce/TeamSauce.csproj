@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -194,6 +194,7 @@
     <Content Include="Content\site.css" />
     <Content Include="Content\jquery.atwho.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\sponsor-signalr.js" />
     <Content Include="Scripts\jquery.pnotify.js" />
     <Content Include="Scripts\jquery.pnotify.min.js" />
     <Content Include="Scripts\main-signalr.js" />
@@ -243,6 +244,7 @@
     <Content Include="Views\Home\_Questionnaire.cshtml" />
     <Content Include="Views\Cat\Index.cshtml" />
     <Content Include="Views\Home\_loginArea.cshtml" />
+    <Content Include="Views\Home\Sponsor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
