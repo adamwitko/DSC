@@ -1,6 +1,11 @@
 ﻿$(function () {
     var proxy = $.connection.teamSauceHub;
 
+    $.pnotify({
+        title: 'Regular Notice',
+        text: 'Check me out! I\'m a notice.'
+    });
+    
     var init_LoginR = function () {
         $("#log-in").click(function () {
             var name = $('#username').val();
